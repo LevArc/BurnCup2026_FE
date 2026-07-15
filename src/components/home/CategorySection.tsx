@@ -25,7 +25,7 @@ export default function CategorySection() {
       {/* Dekorasi */}
       <img
         src="/assets/pohon-kiri-atas-home.png"
-        className="absolute left-0 top-0 w-40 z-0"
+        className="absolute left-0 top-0 w-20 md:w-40 z-0"
         alt=""
       />
       <img
