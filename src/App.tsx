@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
-import Competition from "./pages/competitions";
-import Home from "./pages/Home";
-
+import Footer from "./components/common/Footer";
+import Home from "./pages/HomePage";
 
 function App() {
   return (
@@ -12,6 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/competitions" element={<Competition />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

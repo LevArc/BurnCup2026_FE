@@ -56,7 +56,7 @@ export default function TimelineSection() {
         </p>
       </div>
 
-      {/* Timeline — lingkaran + garis + card per kolom */}
+      {/* Timeline -> lingkaran + garis + card per kolom */}
       <div className="relative z-10 max-w-5xl mx-auto mt-16 px-4">
         {/* Row lingkaran + garis connector */}
         <div className="grid grid-cols-4 mb-6">
