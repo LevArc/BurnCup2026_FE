@@ -8,22 +8,28 @@ interface TimeLeft {
   seconds: number;
 }
 
-export default function Description() {
-  // --- Countdown Logic ---
-  // Set your target date here
-  const targetDate = new Date("2026-08-01T00:00:00").getTime();
+// Interface for the component inputs
+interface DescriptionProps {
+  description: string;
+  targetDate: string; // e.g., "2026-08-01T00:00:00"
+}
 
+export default function Description({ description, targetDate }: DescriptionProps) {
+  // --- Countdown Logic ---
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 15,
-    hours: 9,
-    minutes: 25,
-    seconds: 15,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   useEffect(() => {
+    // Parse the target date passed via props
+    const targetTime = new Date(targetDate).getTime();
+
     const timer = setInterval(() => {
       const now = new Date().getTime();
-      const difference = targetDate - now;
+      const difference = targetTime - now;
 
       if (difference > 0) {
         setTimeLeft({
@@ -33,6 +39,8 @@ export default function Description() {
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
         });
       } else {
+        // Clear timer and ensure it stays at 0 when the date passes
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         clearInterval(timer);
       }
     }, 1000);
@@ -41,18 +49,16 @@ export default function Description() {
   }, [targetDate]);
 
   // --- Sub-component for individual time boxes ---
-const TimeBox = ({ value, label }: { value: number; label: string }) => (
-  // Removed w-auto, h-auto, and px-10. 
-  // Added w-28 h-32 (mobile) and md:w-36 md:h-40 (desktop).
-  <div className="flex flex-col items-center justify-center bg-[#5D3A20] w-28 h-32 md:w-36 md:h-40 rounded-lg shadow-md">
-    <span className="text-[#E7C664] text-[clamp(2rem,3vw,10rem)] font-['Plus_Jakarta_Sans'] font-normal mb-1">
-      {value.toString().padStart(2, '0')}
-    </span>
-    <span className="text-white text-[clamp(1rem,1vw,10rem)] tracking-widest uppercase font-['Plus_Jakarta_Sans'] font-normal">
-      {label}
-    </span>
-  </div>
-);
+  const TimeBox = ({ value, label }: { value: number; label: string }) => (
+    <div className="flex flex-col items-center justify-center bg-[#5D3A20] w-28 h-32 md:w-36 md:h-40 rounded-lg shadow-md">
+      <span className="text-[#E7C664] text-[clamp(2rem,3vw,10rem)] font-['Plus_Jakarta_Sans'] font-normal mb-1">
+        {value.toString().padStart(2, '0')}
+      </span>
+      <span className="text-white text-[clamp(1rem,1vw,10rem)] tracking-widest uppercase font-['Plus_Jakarta_Sans'] font-normal">
+        {label}
+      </span>
+    </div>
+  );
 
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center bg-[url('/competitionBackground/descriptionBg.png')] bg-cover bg-center bg-no-repeat px-[10%] py-12">
@@ -63,13 +69,9 @@ const TimeBox = ({ value, label }: { value: number; label: string }) => (
           <h2 className="text-[clamp(2rem,3.7vw,10rem)] font-['Alfa_Slab_One'] font-normal text-[#E7C664] mb-6 tracking-wide drop-shadow-sm">
             Description
           </h2>
-          <p className="text-[#F4EBE1] text-[clamp(1rem,1.1vw,10rem)] leading-relaxed font-['Plus_Jakarta_Sans'] font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aenean id ex eget tellus gravida mattis vitae ut turpis.
-            Integer mollis nisl mauris, in sodales ante eleifend non.
-            Maecenas imperdiet neque eget libero rhoncus
-            elementum. Quisque egestas nulla at dui rutrum, vitae
-            convallis urna sollicitudin. Sed a dapibus lacus.
+          {/* Replaced hardcoded text with the description prop */}
+          <p className="text-[#F4EBE1] text-[clamp(1rem,1.1vw,10rem)] leading-relaxed font-['Plus_Jakarta_Sans'] font-normal whitespace-pre-wrap">
+            {description}
           </p>
         </div>
 
@@ -80,7 +82,6 @@ const TimeBox = ({ value, label }: { value: number; label: string }) => (
           </h2>
 
           <div className="flex flex-wrap justify-center gap-3 md:gap-5">
-            {/* Note: Corrected "DAR" from the mockup to "DAY" */}
             <TimeBox value={timeLeft.days} label="DAY" />
             <TimeBox value={timeLeft.hours} label="HOUR" />
             <TimeBox value={timeLeft.minutes} label="MINUTE" />
@@ -91,5 +92,4 @@ const TimeBox = ({ value, label }: { value: number; label: string }) => (
       </div>
     </div>
   );
-};
-
+}
