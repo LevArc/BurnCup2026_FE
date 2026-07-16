@@ -6,9 +6,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
 
@@ -17,7 +18,40 @@ export default function Login() {
       return;
     }
 
-    navigate("/", { replace: true });
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Sending keys as "Email" and "Password" as requested
+        body: JSON.stringify({ 
+          Email: email, 
+          Password: password 
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Fallback to a default error message if the backend doesn't send one
+        throw new Error(data.message || "Login gagal. Silahkan cek kredensial anda.");
+      }
+
+      // Save the bearer token to localStorage
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      // Navigate to home page on success
+      navigate("/", { replace: true });
+    } catch (err: any) {
+      setError(err.message || "Terjadi kesalahan saat menghubungi server.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -49,7 +83,8 @@ export default function Login() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="Enter your email"
-                className="w-full rounded-lg bg-gray-200/70 pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 outline-none focus:ring-2 focus:ring-orange-300"
+                disabled={isLoading}
+                className="w-full rounded-lg bg-gray-200/70 pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 outline-none focus:ring-2 focus:ring-orange-300 disabled:opacity-50"
               />
             </div>
 
@@ -66,15 +101,17 @@ export default function Login() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="Enter your password"
-                className="w-full rounded-lg bg-gray-200/70 pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 outline-none focus:ring-2 focus:ring-orange-300"
+                disabled={isLoading}
+                className="w-full rounded-lg bg-gray-200/70 pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 outline-none focus:ring-2 focus:ring-orange-300 disabled:opacity-50"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full rounded-full bg-gradient-to-b from-orange-500 to-orange-700 py-2.5 text-sm font-bold text-white shadow-md hover:opacity-90 transition-opacity"
+              disabled={isLoading}
+              className="w-full rounded-full bg-gradient-to-b from-orange-500 to-orange-700 py-2.5 text-sm font-bold text-white shadow-md hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Login
+              {isLoading ? "Loading..." : "Login"}
             </button>
 
             <div className="my-3 flex items-center gap-3">
@@ -85,7 +122,8 @@ export default function Login() {
 
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#efe3c8] py-2.5 text-sm font-semibold text-[#4a2511] hover:bg-[#e8d8b4] transition-colors"
+              disabled={isLoading}
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#efe3c8] py-2.5 text-sm font-semibold text-[#4a2511] hover:bg-[#e8d8b4] transition-colors disabled:opacity-70"
             >
               <GoogleIcon />
               Continue With Google
