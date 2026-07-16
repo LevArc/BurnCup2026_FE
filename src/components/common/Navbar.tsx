@@ -1,38 +1,92 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "HOME", path: "/" },
-  { label: "ABOUT US", path: "/about" },
   { label: "COMPETITIONS", path: "/competitions" },
-  { label: "CONTACT US", path: "/contact" },
   { label: "SPONSORS", path: "/sponsors" },
+];
+
+const competitionLinks = [
+  { label: "Creative", path: "/competitions/creative" },
+  { label: "Sport", path: "/competitions/sport" },
+  { label: "E-Sport", path: "/competitions/esport" },
 ];
 
 export default function Navbar() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [competitionsOpen, setCompetitionsOpen] = useState(false);
+  const competitionsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (competitionsRef.current && !competitionsRef.current.contains(event.target as Node)) {
+        setCompetitionsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const isCompetitionsRoute = ["/competitions", "/competitions/creative", "/competitions/sport", "/competitions/esport"].includes(location.pathname);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 mx-4 md:mx-6 mt-4">
-      <nav className="bg-gradient-to-b from-[#4A2E1A] to-[#6B4423] rounded-full shadow-lg px-6 md:px-8 py-0 flex justify-between items-center">
-        {/* Logo — kiri */}
-        <Link to="/">
-          <img src="/assets/Logo Burncup.svg" className="h-16 md:h-20" alt="BurnCup Logo" />
+    <div className="fixed top-0 left-0 right-0 z-50 mx-3 sm:mx-4 md:mx-6 mt-3 sm:mt-4">
+      <nav className="bg-linear-to-b from-[#4A2E1A] to-[#6B4423] rounded-full shadow-lg px-3 sm:px-5 md:px-8 py-2 flex justify-between items-center gap-2">
+        <Link to="/" className="shrink-0">
+          <img src="/assets/Navbar/Logo Burncup.png" className="h-10 sm:h-12 md:h-16 lg:h-20 w-auto" alt="BurnCup Logo" />
         </Link>
 
-        {/* Desktop Nav Links + Button */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-5 lg:gap-6">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
+
+            if (link.label === "COMPETITIONS") {
+              return (
+                <div key={link.path} className="relative" ref={competitionsRef}>
+                  <button
+                    type="button"
+                    onClick={() => setCompetitionsOpen((prev) => !prev)}
+                    className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
+                      isCompetitionsRoute ? "border-b-2 border-orange-400 pb-0.5" : "hover:text-orange-300"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+
+                  {competitionsOpen && (
+                    <div className="absolute left-0 top-full mt-3 w-44 rounded-2xl border border-[#7c4720] bg-[#4A2E1A]/95 p-3 shadow-xl backdrop-blur">
+                      <Link
+                        to="/competitions"
+                        onClick={() => setCompetitionsOpen(false)}
+                        className="block rounded-xl px-3 py-2 text-sm text-white transition hover:bg-[#6B4423]"
+                      >
+                        All Competitions
+                      </Link>
+                      {competitionLinks.map((item) => (
+                        <Link
+                          key={item.path}
+                          to={item.path}
+                          onClick={() => setCompetitionsOpen(false)}
+                          className="mt-1 block rounded-xl px-3 py-2 text-sm text-[#f7e2c3] transition hover:bg-[#6B4423] hover:text-white"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                  isActive
-                    ? "border-b-2 border-orange-400 pb-0.5"
-                    : "hover:text-orange-300"
+                  isActive ? "border-b-2 border-orange-400 pb-0.5" : "hover:text-orange-300"
                 }`}
               >
                 {link.label}
@@ -41,13 +95,12 @@ export default function Navbar() {
           })}
           <Link
             to="/register"
-            className="bg-gradient-to-b from-orange-400 to-orange-600 text-white font-semibold rounded-full px-5 py-2 text-sm hover:opacity-90 transition-opacity duration-200"
+            className="bg-linear-to-b from-orange-400 to-orange-600 text-white font-semibold rounded-full px-4 lg:px-5 py-2 text-sm hover:opacity-90 transition-opacity duration-200"
           >
             REGISTER NOW
           </Link>
         </div>
 
-        {/* Hamburger — mobile */}
         <button
           className="md:hidden text-white p-2"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -65,11 +118,33 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 bg-gradient-to-b from-[#4A2E1A] to-[#6B4423] rounded-2xl shadow-lg px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden mt-2 bg-linear-to-b from-[#4A2E1A] to-[#6B4423] rounded-2xl shadow-lg px-5 py-4 flex flex-col gap-3">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
+            if (link.label === "COMPETITIONS") {
+              return (
+                <div key={link.path}>
+                  <div className="flex items-center justify-between text-white uppercase text-sm tracking-wide">
+                    <Link to="/competitions" onClick={() => setMenuOpen(false)} className={isCompetitionsRoute ? "text-orange-400" : "hover:text-orange-300"}>
+                      {link.label}
+                    </Link>
+                    <span className="text-xs text-[#f7e2c3]">▾</span>
+                  </div>
+                  <div className="mt-2 flex flex-col gap-2 rounded-xl bg-[#6B4423]/70 p-2">
+                    <Link to="/competitions" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-1 text-sm text-white hover:bg-[#4A2E1A]">
+                      All Competitions
+                    </Link>
+                    {competitionLinks.map((item) => (
+                      <Link key={item.path} to={item.path} onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-1 text-sm text-[#f7e2c3] hover:bg-[#4A2E1A] hover:text-white">
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.path}
@@ -86,7 +161,7 @@ export default function Navbar() {
           <Link
             to="/register"
             onClick={() => setMenuOpen(false)}
-            className="bg-gradient-to-b from-orange-400 to-orange-600 text-white font-semibold rounded-full px-5 py-2 text-sm text-center hover:opacity-90 transition-opacity duration-200"
+            className="bg-linear-to-b from-orange-400 to-orange-600 text-white font-semibold rounded-full px-5 py-2 text-sm text-center hover:opacity-90 transition-opacity duration-200"
           >
             REGISTER NOW
           </Link>
