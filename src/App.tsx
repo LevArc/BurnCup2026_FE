@@ -10,7 +10,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/competitions" element={<Competition />} />
+        <Route path="/competitions" element={<Competition id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
       </Routes>
       <Footer />
     </BrowserRouter>
