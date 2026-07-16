@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Competition.css';
+import '../styles/competitions.css';
 
 // ================= IMPORT ASSETS =================
 const heroBackground = '/assets/Competitions/hero.png';
@@ -34,7 +34,6 @@ const Competitions: React.FC = () => {
             <h2>Competition Categories</h2>
             <p>Tiga medan, tiga tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
           </div>
-
           <div className="categories-grid">
             {competitionCategories.map((comp) => (
               <Link

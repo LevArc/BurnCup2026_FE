@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Register.css";
+import '../styles/auth.css';
 
 export default function Register() {
   const [email, setEmail] = useState("");

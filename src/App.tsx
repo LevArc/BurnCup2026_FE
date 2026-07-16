@@ -1,30 +1,36 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
-import Home from "./pages/HomePage";
-import CompetitionsPage from "./components/Competitions/Competitions";
-import CreativeCompetitionPage from "./pages/CreativeCompetition";
-import SportCompetitionPage from "./pages/SportCompetition";
-import ESportCompetitionPage from "./pages/ESportCompetition";
-import LoginPage from "./components/Login/Login";
-import RegisterPage from "./components/Register/Register";
-import Competition from "./pages/competitions";
-import Dashboard from "./pages/dashboard";
+
+// Pages
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from "./pages/DashboardPage";
+import CompetitionsPage from "./pages/CompetitionsPage";
+import CompetitionDetailPage from "./pages/CompetitionDetailPage";
+import FutsalCompetitionPage from "./pages/FutsalCompetitionPage";
+
+// Competition Category Pages
+import SportCompetitionPage from "./pages/competitions/SportCompetitionPage";
+import ESportCompetitionPage from "./pages/competitions/ESportCompetitionPage";
+import CreativeCompetitionPage from "./pages/competitions/CreativeCompetitionPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/competitions" element={<CompetitionsPage />} />
-        <Route path="/competitions/creative" element={<CreativeCompetitionPage />} />
-        <Route path="/competitions/sport" element={<SportCompetitionPage />} />
-        <Route path="/competitions/esport" element={<ESportCompetitionPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/competition" element={<Competition id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/competitions" element={<CompetitionsPage />} />
+        <Route path="/competitions/sport" element={<SportCompetitionPage />} />
+        <Route path="/competitions/esport" element={<ESportCompetitionPage />} />
+        <Route path="/competitions/creative" element={<CreativeCompetitionPage />} />
+        <Route path="/competitions/futsal" element={<FutsalCompetitionPage />} />
+        <Route path="/competition" element={<CompetitionDetailPage id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
       </Routes>
       <Footer />
     </BrowserRouter>
