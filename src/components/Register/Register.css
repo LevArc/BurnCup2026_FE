@@ -1,0 +1,71 @@
+:root {
+  --nav-clearance: clamp(6.25rem, 13vh, 7.5rem);
+}
+
+.register-page {
+  height: 100vh;
+  height: 100dvh; /* accounts for mobile browser chrome so nothing gets cut/scrolled */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #f7f1e3;
+  background-image: url("/assets/Register/Register.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+}
+
+.register-page__inner {
+  width: 100%;
+  max-width: 1280px; /* keeps the panel from hugging the very edge on ultra-wide screens */
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--nav-clearance) clamp(2rem, 9vw, 6.5rem) clamp(1.25rem, 4vh, 2rem);
+}
+
+.register-panel {
+  width: 100%;
+  max-width: 23rem;
+}
+
+.register-card {
+  background: #fff;
+  border-radius: 28px;
+  border: 1px solid #f0dfc0;
+  box-shadow: 0 20px 45px -20px rgba(74, 37, 17, 0.35);
+  padding: clamp(1.1rem, 3vh, 1.75rem) clamp(1.5rem, 3vw, 2rem);
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-clearance: clamp(4.5rem, 15vh, 5.5rem);
+  }
+
+  .register-page {
+    background-position: 30% center;
+  }
+
+  .register-page__inner {
+    justify-content: center;
+    padding: var(--nav-clearance) 1.25rem clamp(1.25rem, 4vh, 1.75rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .register-panel {
+    max-width: 100%;
+  }
+
+  .register-card {
+    padding: 1.1rem 1.25rem;
+    border-radius: 22px;
+  }
+}
