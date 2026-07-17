@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './SportCompetition.css';
+import '../../styles/competitions.css';
 
 // ================= IMPORT ASSETS =================
-const heroBackground = '/assets/SportCompetition/hero.png';
-const aboutImage = '/assets/SportCompetition/Sport.png';
+const heroBackground = '/assets/ESportCompetition/hero.png';
+const aboutImage = '/assets/ESportCompetition/ESport.png';
 
 // Import Gambar Pohon
-const treeLeft = '/assets/SportCompetition/Tree Left.png';
-const treeRight = '/assets/SportCompetition/Tree Right.png';
+const treeLeft = '/assets/ESportCompetition/Tree Left.png';
+const treeRight = '/assets/ESportCompetition/Tree Right.png';
 
 // Import Artwork Unik Setiap Kompetisi
-const imgFutsal = '/assets/SportCompetition/Futsal.jpg';
-const imgBasketball = '/assets/SportCompetition/Basketball.jpg';
-const imgVolly = '/assets/SportCompetition/volly.jpg';
-const imgPingpong = '/assets/SportCompetition/Pingpong.jpg';
-const imgBilliard = '/assets/SportCompetition/Billiard.jpg';
-const imgChess = '/assets/SportCompetition/chess.jpg';
+const imgFIFA = '/assets/ESportCompetition/FIFA.jpg';
+const imgMobileLegend = '/assets/ESportCompetition/MobileLegend.jpg';
+const imgValorant = '/assets/ESportCompetition/VALORANT.jpg';
+const imgNBA2k = '/assets/ESportCompetition/NBA2K.jpg';
+const imgPubg = '/assets/ESportCompetition/PUBG.jpg';
 
 interface CompetitionCategory {
   id: string;
@@ -26,17 +25,16 @@ interface CompetitionCategory {
 }
 
 const esportCompetitions: CompetitionCategory[] = [
-  { id: 'c1', title: 'Futsal', image: imgFutsal, path: '/competitions/futsal' },
-  { id: 'c2', title: 'Basketball', image: imgBasketball, path: '/competitions/basketball' },
-  { id: 'c3', title: 'Volly', image: imgVolly, path: '/competitions/volly' },
-  { id: 'c4', title: 'Pingpong', image: imgPingpong, path: '/competitions/pingpong' },
-  { id: 'c5', title: 'Billiard', image: imgBilliard, path: '/competitions/billiard' },
-  { id: 'c6', title: 'Chess', image: imgChess, path: '/competitions/chess' },
+  { id: 'c1', title: 'FIFA', image: imgFIFA, path: '/competitions/fifa' },
+  { id: 'c2', title: 'Mobile Legend', image: imgMobileLegend, path: '/competitions/mobile-legend' },
+  { id: 'c3', title: 'Valorant', image: imgValorant, path: '/competitions/valorant' },
+  { id: 'c4', title: 'NBA 2K', image: imgNBA2k, path: '/competitions/nba-2k' },
+  { id: 'c5', title: 'PUBG Mobile', image: imgPubg, path: '/competitions/pubg-mobile' },
 ];
 
-const SportCompetition: React.FC = () => {
+const ESportCompetition: React.FC = () => {
   return (
-    <div className="sport-page">
+    <div className="e-sport-page">
 
       {/* ================= HERO SECTION ================= */}
       <section className="hero-section" style={{ backgroundImage: `url(${heroBackground})` }} />
@@ -48,9 +46,9 @@ const SportCompetition: React.FC = () => {
             <img src={aboutImage} alt="About Competition" className="about-image" />
           </div>
           <div className="about-text">
-            <h2>What's Sport Competition<br/>At Burncup 2026?</h2>
+            <h2>What's E-Sport Competition<br/>At Burncup 2026?</h2>
             <p>
-              The BURNCUP Sport arena is where strategy, speed, and precision collide. 
+              The BURNCUP E-Sport arena is where strategy, speed, and precision collide. 
               We provide a professional platform for elite competitors to showcase their prowess 
               across the globe's most demanding games. Every move, every detail, and every 
               performance is amplified in our high-performance ecosystem.
@@ -66,8 +64,8 @@ const SportCompetition: React.FC = () => {
           <img src={treeRight} alt="Tree Right" className="tree-right-new" />
 
           <div className="categories-header">
-            <h2>Sport Competitions</h2>
-            <p>Enam medan, enam tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
+            <h2>E-Sport Competitions</h2>
+            <p>Lima medan, lima tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
           </div>
 
           <div className="categories-grid">
@@ -100,4 +98,4 @@ const SportCompetition: React.FC = () => {
   );
 };
 
-export default SportCompetition;
+export default ESportCompetition;

@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center justify-end pb-16 md:pb-24 w-full">
         <img
           src="/assets/Logo Burncup.svg"
-          className="w-[300px] md:w-[500px] max-w-[80%] mx-auto"
+          className="w-[50%] md:w-[60%] mx-auto"
           alt="BurnCup Logo"
         />
       </div>
