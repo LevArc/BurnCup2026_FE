@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Search, Plus, AlertCircle, CheckCircle2, UserCheck, Users } from 'lucide-react';
 
 interface TeamManagementProps {
   competitionId: string;
@@ -156,33 +156,56 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
     <div 
       className="min-h-screen w-full flex flex-col items-center justify-center py-10 px-4 bg-cover bg-bottom font-sans"
       style={{ 
-        backgroundImage: `url('/path/to/your/image_3939b2.png')`,
+        backgroundImage: `url('/assets/register-competition-bg.png')`,
         backgroundColor: '#f3ece1'
       }}
     >
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden">
-        
-        {/* --- Header Section --- */}
-        <div className="flex flex-col items-center justify-center pt-8 pb-6 px-6 border-b border-gray-200">
-          <span className="bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-semibold mb-4">
-            Step 3 of 3
-          </span>
-          <h1 className="text-3xl font-bold text-[#1e3a8a] mb-2">
-            Join or Create Team
-          </h1>
-          <p className="text-gray-500">
-            Set up your team for the competition
-          </p>
+      {/* --- Progress Indicator --- */}
+      <div className="flex items-center gap-4 mb-8 z-10">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <div className="w-12 h-12 bg-[#a14714] rounded-full flex items-center justify-center shadow-sm relative">
+            <UserCheck className="text-white w-6 h-6" />
+          </div>
+          <span className="text-sm font-bold text-black text-center">Complete Profile</span>
         </div>
 
+        <div className="w-24 h-[2px] bg-[#a14714] -mt-6"></div>
+
+        <div className="flex flex-col items-center gap-2 text-center">
+          <div className="w-12 h-12 bg-[#a14714] rounded-full flex items-center justify-center border-2 border-[#3f271d] shadow-sm relative">
+            <Users className="text-white w-6 h-6" />
+          </div>
+          <span className="text-sm font-bold text-black text-center">Join or Create Team</span>
+        </div>
+      </div>
+
+      {/* --- Form Container --- */}
+      <div className="bg-[#fbf7f0] border border-[#b45309] rounded-xl p-8 max-w-2xl w-full shadow-2xl z-10 relative">
+        
+        {/* Form Header */}
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-2xl md:text-3xl font-black text-[#3f271d] tracking-wide">
+            Join or Create Team
+          </h2>
+          <span className="bg-[#d1d5db] text-[#374151] px-3 py-1 rounded-md text-sm font-semibold">
+            Step 2 of 2
+          </span>
+        </div>
+        
+        <p className="text-[#3f271d] font-medium mb-4">
+          Set up your team for the competition
+        </p>
+        
+        <hr className="border-[#8C4A15] mb-6" />
+
         {/* --- Tabs Section --- */}
-        <div className="flex w-full border-b border-gray-200">
+        <div className="flex w-full border-b border-[#8C4A15]/30 mb-8">
           <button
             onClick={() => handleTabSwitch('join')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 text-sm font-semibold transition-colors duration-200 ${
+            className={`flex-1 flex items-center justify-center gap-2 py-4 text-sm font-bold transition-colors duration-200 ${
               activeTab === 'join' 
-                ? 'text-blue-600 bg-blue-50/50 border-b-2 border-blue-500' 
-                : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                ? 'text-[#b45309] border-b-2 border-[#b45309] bg-[#f4f5f7]/50' 
+                : 'text-[#5c3a21] hover:bg-[#f4f5f7] hover:text-[#3f271d]'
             }`}
           >
             <Search className="w-4 h-4" />
@@ -191,10 +214,10 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
           
           <button
             onClick={() => handleTabSwitch('create')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 text-sm font-semibold transition-colors duration-200 ${
+            className={`flex-1 flex items-center justify-center gap-2 py-4 text-sm font-bold transition-colors duration-200 ${
               activeTab === 'create' 
-                ? 'text-blue-600 bg-blue-50/50 border-b-2 border-blue-500' 
-                : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                ? 'text-[#b45309] border-b-2 border-[#b45309] bg-[#f4f5f7]/50' 
+                : 'text-[#5c3a21] hover:bg-[#f4f5f7] hover:text-[#3f271d]'
             }`}
           >
             <Plus className="w-4 h-4" />
@@ -203,40 +226,36 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
         </div>
 
         {/* --- Content Area --- */}
-        <div className="p-8">
-          
+        <div>
           {/* Status Messages */}
           {errorMessage && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-3 max-w-2xl mx-auto">
+            <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex items-center gap-3">
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
-              <span className="text-sm font-medium">{errorMessage}</span>
+              <span className="text-sm font-semibold">{errorMessage}</span>
             </div>
           )}
           {successMessage && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-3 max-w-2xl mx-auto">
+            <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-              <span className="text-sm font-medium">{successMessage}</span>
+              <span className="text-sm font-semibold">{successMessage}</span>
             </div>
           )}
 
           {/* JOIN TEAM VIEW */}
           {activeTab === 'join' && (
-            <div className="flex flex-col items-center">
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Join an Existing Team</h2>
-              <p className="text-gray-500 mb-8 text-center">
+            <div className="flex flex-col">
+              <h2 className="text-xl font-bold text-[#5c3a21] mb-2">Join an Existing Team</h2>
+              <p className="text-[#3f271d] font-medium mb-6">
                 Have a team code? Enter it below to join a team directly.
               </p>
 
-              <div className="w-full bg-[#f4f8fc] border border-[#d6e4f5] rounded-xl p-6 max-w-2xl mx-auto">
-                <div className="flex items-center gap-2 text-[#1e3a8a] font-semibold mb-2">
+              <div className="w-full bg-[#f4f5f7] border border-gray-300 rounded-xl p-6">
+                <div className="flex items-center gap-2 text-[#5c3a21] font-bold mb-2 text-sm">
                   <Search className="w-5 h-5" />
                   <h3>Join with Team Code</h3>
                 </div>
-                <p className="text-gray-600 text-sm mb-4">
-                  Have a team code? Enter it below to join directly.
-                </p>
 
-                <form onSubmit={handleJoinTeam} className="flex flex-col sm:flex-row gap-3">
+                <form onSubmit={handleJoinTeam} className="flex flex-col sm:flex-row gap-3 mt-4">
                   <input
                     type="text"
                     value={teamCode}
@@ -244,12 +263,12 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
                       setTeamCode(e.target.value);
                       setErrorMessage('');
                     }}
-                    placeholder="Enter team code (e.g., TB2025, CK2025)"
-                    className="flex-1 px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-700 uppercase" // Added uppercase styling just as a nice touch
+                    placeholder="Enter team code (e.g., TB2025)"
+                    className="flex-1 bg-white border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309] uppercase"
                   />
                   <button 
                     type="submit"
-                    className="bg-[#759df1] hover:bg-blue-500 text-white font-semibold py-3 px-8 rounded-lg transition-colors whitespace-nowrap"
+                    className="bg-[#a14714] hover:bg-[#85390f] text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 whitespace-nowrap"
                   >
                     Join Team
                   </button>
@@ -260,25 +279,22 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
 
           {/* CREATE TEAM VIEW */}
           {activeTab === 'create' && (
-            <div className="flex flex-col items-center">
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Create Your Own Team</h2>
-              <p className="text-gray-500 mb-8 text-center">
+            <div className="flex flex-col">
+              <h2 className="text-xl font-bold text-[#5c3a21] mb-2">Create Your Own Team</h2>
+              <p className="text-[#3f271d] font-medium mb-6">
                 Start your own team and invite other players to join
               </p>
 
-              <div className="w-full border border-gray-200 rounded-xl p-6 max-w-2xl mx-auto">
-                <div className="flex items-center gap-2 text-gray-900 font-bold mb-1">
+              <div className="w-full bg-[#f4f5f7] border border-gray-300 rounded-xl p-6">
+                <div className="flex items-center gap-2 text-[#5c3a21] font-bold mb-4 text-sm">
                   <Plus className="w-5 h-5" />
                   <h3>Team Details</h3>
                 </div>
-                <p className="text-gray-500 text-sm mb-6">
-                  Provide information about your new team
-                </p>
 
                 <form onSubmit={handleCreateTeam} className="space-y-5">
                   {/* Team Name Input */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                    <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                       Team Name *
                     </label>
                     <input
@@ -289,42 +305,44 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
                         setErrorMessage('');
                       }}
                       placeholder="Enter your team name"
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-800"
+                      className="w-full bg-white border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
                     />
                   </div>
 
                   {/* Competition Name (Read-Only Dynamic) */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      Competition Name
-                    </label>
-                    <input
-                      type="text"
-                      readOnly
-                      value={compDetails ? compDetails.name : 'Loading...'}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-500 cursor-not-allowed"
-                    />
-                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
+                        Competition Name
+                      </label>
+                      <input
+                        type="text"
+                        readOnly
+                        value={compDetails ? compDetails.name : 'Loading...'}
+                        className="w-full bg-[#e5e7eb] border border-gray-300 text-[#374151] rounded-lg py-2.5 px-4 cursor-not-allowed"
+                      />
+                    </div>
 
-                  {/* Maximum Team Size (Read-Only Dynamic) */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      Maximum Team Size
-                    </label>
-                    <input
-                      type="text"
-                      readOnly
-                      value={compDetails ? compDetails.maxMembers : '...'}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-500 cursor-not-allowed"
-                    />
-                    <p className="text-gray-500 text-xs mt-2">
-                      Competition rules require {compDetails ? `${compDetails.minMembers}-${compDetails.maxMembers}` : '...'} players per team
-                    </p>
+                    {/* Maximum Team Size (Read-Only Dynamic) */}
+                    <div>
+                      <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
+                        Maximum Team Size
+                      </label>
+                      <input
+                        type="text"
+                        readOnly
+                        value={compDetails ? compDetails.maxMembers : '...'}
+                        className="w-full bg-[#e5e7eb] border border-gray-300 text-[#374151] rounded-lg py-2.5 px-4 cursor-not-allowed"
+                      />
+                      <p className="text-[#5c3a21] text-xs font-semibold mt-2">
+                        Rules require {compDetails ? `${compDetails.minMembers}-${compDetails.maxMembers}` : '...'} players
+                      </p>
+                    </div>
                   </div>
 
                   <button 
                     type="submit"
-                    className="w-full bg-[#759df1] hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition-colors mt-6"
+                    className="w-full bg-[#a14714] hover:bg-[#85390f] text-white font-bold text-lg py-3 rounded-lg mt-4 transition-colors duration-200"
                     disabled={!compDetails}
                   >
                     Create Team
