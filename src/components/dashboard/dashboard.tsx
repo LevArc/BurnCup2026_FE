@@ -32,7 +32,7 @@ export default function DashboardComp() {
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiZXhwIjoxNzg2NjMxNjc3LCJpYXQiOjE3ODQwMzk2NzcsInN1YiI6Ijk5N2I0MTFiLTZjMDAtNGVmNy04NzczLTlkYWQ2ZmMwYWRhZSJ9.unzPB_F4Hp0bpGwzRQh-ji7-jdb17aEGr8Nwrf3ezsY';
+      const token = localStorage.getItem('token');
       const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

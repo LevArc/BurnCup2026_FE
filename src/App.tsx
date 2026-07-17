@@ -10,6 +10,8 @@ import DashboardPage from "./pages/DashboardPage";
 import CompetitionsPage from "./pages/CompetitionsPage";
 import CompetitionDetailPage from "./pages/CompetitionDetailPage";
 import AuthSuccess from "./pages/AuthSuccess";
+import RegistrationForm from "./pages/RegisterCompetition";
+import TeamManagement from "./pages/TeamManagement";
 
 // Competition Category Pages
 import SportCompetitionPage from "./pages/competitions/SportCompetitionPage";
@@ -34,8 +36,10 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage/>} />
         <Route path="/competition" element={<CompetitionDetailPage id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
         <Route path="/auth-success" element={<AuthSuccess />} />
+        <Route path="/register-competition" element={<RegistrationForm />} />
+        <Route path="/register-team" element={<TeamManagement competitionId="714791d5-945f-494f-8d8c-6ca1fb65f095" />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
