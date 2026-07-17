@@ -187,19 +187,22 @@ h2, h3 {
 .tree-left-new {
   position: absolute;
   bottom: -65px;
-  left: -50px;
+  left: 50%;
+  --tree-bleed: 50px;
+  transform: translateX(calc(-50vw - var(--tree-bleed))) rotate(-1deg);
+  transform-origin: bottom left;
   width: 380px;
   height: auto;
   z-index: 1;
-  transform: rotate(-1deg);
-  transform-origin: bottom left;
   pointer-events: none;
 }
 
 .tree-right-new {
   position: absolute;
   bottom: -150px;
-  right: -40px;
+  right: 50%;
+  --tree-bleed: 40px;
+  transform: translateX(calc(50vw + var(--tree-bleed)));
   width: 360px;
   height: auto;
   z-index: 1;

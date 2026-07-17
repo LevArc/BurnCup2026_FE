@@ -48,10 +48,10 @@ const CreativeCompetition: React.FC = () => {
           <div className="about-text">
             <h2>What's Creative Competition<br/>At Burncup 2026?</h2>
             <p>
-              The BURNCUP Creative arena is where raw talent meets artistic mastery. 
-              We provide a professional platform for elite competitors to showcase their prowess 
-              across the globe's most demanding arts. Every move, every detail, and every 
-              performance is amplified in our high-performance ecosystem.
+                            The BURNCUP Creative arena is where imagination, artistry, and passion take center stage.
+                            We provide an inspiring platform for talented individuals to express themselves and
+                            captivate audiences across a diverse range of creative disciplines.
+                            Every performance, every creation, and every detail tells a story worth celebrating.
             </p>
           </div>
         </div>
@@ -59,14 +59,14 @@ const CreativeCompetition: React.FC = () => {
 
       {/* ================= CATEGORIES SECTION ================= */}
       <section className="categories-section">
-        {/* Pembungkus agar posisi pohon terkunci di samping kartu */}
+        {/* Wrapper to lock tree decorations beside the cards */}
         <div className="categories-wrapper"> 
           <img src={treeLeft} alt="Tree Left" className="tree-left-new" />
           <img src={treeRight} alt="Tree Right" className="tree-right-new" />
           
           <div className="categories-header">
             <h2>Creative Competitions</h2>
-            <p>Lima medan, lima tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
+            <p>Five canvases, five different challenges. Choose the path that best matches your expertise.</p>
           </div>
 
           <div className="categories-grid">
@@ -80,8 +80,7 @@ const CreativeCompetition: React.FC = () => {
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
                   <p>
-                    Tunjukkan bakat terbaikmu di ajang bergengsi ini. 
-                    Raih kesempatan untuk menjadi juara di Burncup 2026.
+                    Showcase your best talent in this prestigious event. Seize the chance to become the champion of Burncup 2026.
                   </p>
                 </div>
               </Link>
