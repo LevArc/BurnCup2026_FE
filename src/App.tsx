@@ -10,6 +10,7 @@ import LoginPage from "./components/Login/Login";
 import RegisterPage from "./components/Register/Register";
 import Competition from "./pages/competitions";
 import Dashboard from "./pages/dashboard";
+import AuthSuccess from "./pages/AuthSuccess";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/competition" element={<Competition id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
+        <Route path="/auth-success" element={<AuthSuccess />} />
       </Routes>
       <Footer />
     </BrowserRouter>

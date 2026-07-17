@@ -26,7 +26,6 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        // Sending keys as "Email" and "Password" as requested
         body: JSON.stringify({ 
           Email: email, 
           Password: password 
@@ -36,22 +35,25 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        // Fallback to a default error message if the backend doesn't send one
         throw new Error(data.message || "Login gagal. Silahkan cek kredensial anda.");
       }
 
-      // Save the bearer token to localStorage
       if (data.token) {
         localStorage.setItem("token", data.token);
       }
 
-      // Navigate to home page on success
       navigate("/", { replace: true });
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan saat menghubungi server.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // NEW: Handler for Google OAuth redirect
+  const handleGoogleLogin = () => {
+    // Adjust this URL to match your actual Go backend route for GoogleLoginHandler
+    window.location.href = "http://localhost:8080/api/auth/google";
   };
 
   return (
@@ -122,6 +124,7 @@ export default function Login() {
 
             <button
               type="button"
+              onClick={handleGoogleLogin}
               disabled={isLoading}
               className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#efe3c8] py-2.5 text-sm font-semibold text-[#4a2511] hover:bg-[#e8d8b4] transition-colors disabled:opacity-70"
             >
