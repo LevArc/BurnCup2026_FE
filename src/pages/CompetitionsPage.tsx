@@ -32,7 +32,7 @@ const Competitions: React.FC = () => {
         <div className="categories-wrapper">
           <div className="categories-header">
             <h2>Competition Categories</h2>
-            <p>Tiga medan, tiga tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
+              <p>Three arenas, three different challenges. Choose the path that best fits your skills.</p>
           </div>
           <div className="categories-grid">
             {competitionCategories.map((comp) => (
@@ -44,10 +44,10 @@ const Competitions: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                  <p>
-                    Tunjukkan bakat terbaikmu di ajang bergengsi ini.
-                    Raih kesempatan untuk menjadi juara di Burncup 2026.
-                  </p>
+                    <p>
+                      Show your best talent at this prestigious event.
+                      Seize the chance to become a champion at Burncup 2026.
+                    </p>
                 </div>
               </Link>
             ))}

@@ -25,7 +25,7 @@ interface CompetitionCategory {
   path: string;
 }
 
-const esportCompetitions: CompetitionCategory[] = [
+const sportCompetitions: CompetitionCategory[] = [
   { id: 'c1', title: 'Futsal', image: imgFutsal, path: '/competitions/futsal' },
   { id: 'c2', title: 'Basketball', image: imgBasketball, path: '/competitions/basketball' },
   { id: 'c3', title: 'Volly', image: imgVolly, path: '/competitions/volly' },
@@ -50,10 +50,10 @@ const SportCompetition: React.FC = () => {
           <div className="about-text">
             <h2>What's Sport Competition<br/>At Burncup 2026?</h2>
             <p>
-              The BURNCUP Sport arena is where strategy, speed, and precision collide. 
-              We provide a professional platform for elite competitors to showcase their prowess 
-              across the globe's most demanding games. Every move, every detail, and every 
-              performance is amplified in our high-performance ecosystem.
+                            The BURNCUP Sport arena is where athleticism, endurance, and teamwork come together.
+              We provide a competitive stage for dedicated athletes to push their limits and
+              showcase their physical excellence across a range of traditional and modern sports.
+              Every match, every point, and every victory is celebrated in our energetic sporting environment.
             </p>
           </div>
         </div>
@@ -67,11 +67,11 @@ const SportCompetition: React.FC = () => {
 
           <div className="categories-header">
             <h2>Sport Competitions</h2>
-            <p>Enam medan, enam tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
+            <p>Six grounds, six different challenges. Choose the path that best matches your expertise.</p>
           </div>
 
           <div className="categories-grid">
-            {esportCompetitions.map((comp) => (
+            {sportCompetitions.map((comp) => (
               <Link
                 to={comp.path}
                 className="category-card"
@@ -80,9 +80,9 @@ const SportCompetition: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                  <p>
-                    Tunjukkan bakat terbaikmu di ajang bergengsi ini.
-                    Raih kesempatan untuk menjadi juara di Burncup 2026.
+                                    <p>
+                    Prove your athletic excellence at this prestigious event.
+                    Compete for the championship title at Burncup 2026.
                   </p>
                 </div>
               </Link>

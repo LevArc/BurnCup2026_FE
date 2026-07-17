@@ -65,7 +65,7 @@ const ESportCompetition: React.FC = () => {
 
           <div className="categories-header">
             <h2>E-Sport Competitions</h2>
-            <p>Lima medan, lima tantangan berbeda. Pilih jalur yang paling sesuai dengan keahlianmu.</p>
+            <p>Five terrains, five different challenges. Choose the path that best matches your expertise.</p>
           </div>
 
           <div className="categories-grid">
@@ -78,10 +78,10 @@ const ESportCompetition: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                  <p>
-                    Tunjukkan bakat terbaikmu di ajang bergengsi ini.
-                    Raih kesempatan untuk menjadi juara di Burncup 2026.
-                  </p>
+                     <p>
+                       Prove your skills at this prestigious event.
+                       Compete for the championship title at Burncup 2026.
+                     </p>
                 </div>
               </Link>
             ))}
