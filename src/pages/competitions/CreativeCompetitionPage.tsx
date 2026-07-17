@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CreativeCompetition.css';
+import '../../styles/competitions.css';
 
 // ================= IMPORT ASSETS =================
 const heroBackground = '/assets/CreativeCompetition/hero.png';

@@ -1,101 +1,101 @@
+import { motion } from "framer-motion";
+
 const timelineItems = [
   {
-    number: 1,
-    date: "1 - 30 AGUSTUS 2026",
+    time: "2026-08-01T00:00:00",
     title: "Registration Opens",
     description: "Pendaftaran tim dibuka untuk seluruh kategori kompetisi.",
-    borderColor: "border-orange-500",
-    dateColor: "text-orange-500",
   },
   {
-    number: 2,
-    date: "1 - 15 SEPTEMBER 2026",
+    time: "2026-09-01T00:00:00",
     title: "Verification Phase",
     description: "Verifikasi data peserta dan konfirmasi pembayaran pendaftaran.",
-    borderColor: "border-green-800",
-    dateColor: "text-green-800",
   },
   {
-    number: 3,
-    date: "20 SEPTEMBER 2026",
+    time: "2026-09-20T00:00:00",
     title: "Technical Meeting",
     description: "Pertemuan teknis seluruh tim peserta sebelum kompetisi dimulai.",
-    borderColor: "border-yellow-600",
-    dateColor: "text-yellow-600",
   },
   {
-    number: 4,
-    date: "1 - 30 OKTOBER 2026",
+    time: "2026-10-01T00:00:00",
     title: "Competition Day",
     description: "Hari pelaksanaan kompetisi untuk seluruh kategori.",
-    borderColor: "border-blue-400",
-    dateColor: "text-blue-400",
   },
 ];
 
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export default function TimelineSection() {
   return (
-    <section className="relative bg-[#F0E6D2] py-20 md:py-24 overflow-hidden">
-      {/* Background gunung hijau */}
-      <img
-        src="/assets/gunung-ijo-timeline.png"
-        className="absolute bottom-0 left-0 w-full z-0"
-        alt=""
-      />
+    <div
+      className="relative min-h-screen flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-bottom bg-no-repeat bg-cover"
+      style={{
+        backgroundImage: "url('/assets/gunung-ijo-timeline.png')",
+        backgroundColor: "#F0E6D2",
+      }}
+    >
+      <div className="relative z-10 w-full max-w-6xl mx-auto">
 
-      {/* Heading */}
-      <div className="relative z-10 text-center px-6">
-        <div className="absolute left-[15%] top-4 w-16 md:w-20 h-16 rounded-full bg-green-200/40" />
-        <div className="absolute right-[15%] top-4 w-16 md:w-20 h-16 rounded-full bg-green-200/40" />
-        <h2 className="text-4xl md:text-5xl font-bold font-serif text-black relative z-10">
-          Event Timeline
-        </h2>
-        <p className="text-gray-600 text-sm mt-3 max-w-md mx-auto relative z-10">
-          Ikuti jejak jalur ekspedisi BurnCup 2026 dari titik awal pendaftaran
-          hingga garis akhir final.
-        </p>
-      </div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-row justify-center items-center gap-[5%] mb-16 text-center"
+        >
+          <div className="block w-20 h-20 opacity-0" />
+          <div className="max-w-xl">
+            <h2 className="font-black text-[#1A1A1A] mb-3 font-['Alfa_Slab_One'] text-[clamp(2rem,3.4vw,4rem)] font-normal tracking-wide text-center">
+              Event Timeline
+            </h2>
+            <p className="text-gray-600 text-sm max-w-md mx-auto">
+              Ikuti jejak jalur ekspedisi BurnCup 2026 dari titik awal
+              pendaftaran hingga garis akhir final.
+            </p>
+          </div>
+          <div className="block w-20 h-20 opacity-0" />
+        </motion.div>
 
-      {/* Timeline -> lingkaran + garis + card per kolom */}
-      <div className="relative z-10 max-w-5xl mx-auto mt-16 px-4">
-        {/* Row lingkaran + garis connector */}
-        <div className="grid grid-cols-4 mb-6">
+        {/* Timeline cards */}
+        <div className="flex flex-col md:flex-row justify-between items-stretch gap-6 md:gap-4">
           {timelineItems.map((item, index) => (
-            <div key={item.number} className="flex items-center">
-              {/* Lingkaran Kuning tai center di kolom */}
-              <div className="flex-1 flex justify-center">
-                <div className="w-10 h-10 rounded-full bg-yellow-400 border-2 border-yellow-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
-                  {item.number}
-                </div>
-              </div>
-              {/* Connector */}
-              {index < timelineItems.length - 1 && (
-                <div className="flex-1 h-[3px] bg-yellow-700/40" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Row card */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {timelineItems.map((item) => (
-            <div
-              key={item.number}
-              className={`bg-[#FDF8ED] rounded-lg shadow-sm border-t-4 p-5 text-left ${item.borderColor}`}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.15 }}
+              className="flex-1 flex flex-col items-center relative"
             >
-              <p className={`text-xs font-semibold uppercase tracking-wide ${item.dateColor}`}>
-                {item.date}
-              </p>
-              <h3 className="text-base md:text-lg font-bold mt-1 text-black">
-                {item.title}
-              </h3>
-              <p className="text-gray-500 text-xs mt-2 leading-relaxed">
-                {item.description}
-              </p>
-            </div>
+              {/* Circle */}
+              <div className="w-10 h-10 rounded-full bg-[#F4BE29] border-[3px] border-[#2C2C2C] flex justify-center items-center font-black text-[#2C2C2C] z-10 mb-6 shadow-sm">
+                {index + 1}
+              </div>
+
+              {/* Card */}
+              <div className="w-full h-full bg-[#FAF8F1] border border-black/10 p-6 shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                <p className="text-[11px] md:text-xs font-bold tracking-wider mb-2 text-[#5A5A5A]">
+                  {formatDate(item.time)}
+                </p>
+                <h3 className="text-lg font-black text-[#1A1A1A] mb-2 font-serif">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
