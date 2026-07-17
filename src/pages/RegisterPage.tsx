@@ -8,8 +8,6 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // New state to handle the success/loading screen transition
   const [isSuccess, setIsSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -49,27 +47,29 @@ export default function Register() {
         throw new Error(data.message || "Registrasi gagal. Silahkan coba lagi.");
       }
 
-      // Trigger the success loading screen
       setIsSuccess(true);
       setSuccessMessage(data.message || "User registered successfully");
 
-      // Wait for 2.5 seconds to show the loading/success screen, then go to login
       setTimeout(() => {
         navigate("/login", { replace: true });
       }, 2500);
 
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan saat menghubungi server.");
-      setIsLoading(false); // Only set loading to false if there's an error
+      setIsLoading(false);
     }
+  };
+
+  // NEW: Handler for Google OAuth redirect
+  const handleGoogleLogin = () => {
+    // Adjust this URL to match your actual Go backend route for GoogleLoginHandler
+    window.location.href = "http://localhost:8080/api/auth/google";
   };
 
   return (
     <section className="register-page">
       <div className="register-page__inner">
         <div className="register-panel">
-
-          {/* If registration is successful, show this loading screen instead of the form */}
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-10 text-center animate-pulse">
               <div className="mb-4 rounded-full bg-green-100 p-3">
@@ -79,11 +79,9 @@ export default function Register() {
               <p className="text-sm text-[#5e4231]">
                 Mengalihkan ke halaman login...
               </p>
-              {/* CSS spinner */}
               <div className="mt-6 h-8 w-8 animate-spin rounded-full border-4 border-[#e4d3b4] border-t-orange-500 mx-auto" />
             </div>
           ) : (
-            /* Otherwise, show the normal registration form */
             <form className="register-card" onSubmit={handleSubmit} noValidate>
               <h1 className="text-2xl md:text-3xl font-bold text-[#4a2511]">Register</h1>
               <p className="mt-1 mb-4 text-sm md:text-base text-[#5e4231]">
@@ -166,6 +164,7 @@ export default function Register() {
 
               <button
                 type="button"
+                onClick={handleGoogleLogin}
                 disabled={isLoading}
                 className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#efe3c8] py-2.5 text-sm font-semibold text-[#4a2511] hover:bg-[#e8d8b4] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               >

@@ -9,7 +9,7 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import CompetitionsPage from "./pages/CompetitionsPage";
 import CompetitionDetailPage from "./pages/CompetitionDetailPage";
-import FutsalCompetitionPage from "./pages/FutsalCompetitionPage";
+import AuthSuccess from "./pages/AuthSuccess";
 
 // Competition Category Pages
 import SportCompetitionPage from "./pages/competitions/SportCompetitionPage";
@@ -29,8 +29,11 @@ function App() {
         <Route path="/competitions/sport" element={<SportCompetitionPage />} />
         <Route path="/competitions/esport" element={<ESportCompetitionPage />} />
         <Route path="/competitions/creative" element={<CreativeCompetitionPage />} />
-        <Route path="/competitions/futsal" element={<FutsalCompetitionPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage/>} />
         <Route path="/competition" element={<CompetitionDetailPage id="ee15b41f-9090-40fb-9b56-1a49558e4c17" />} />
+        <Route path="/auth-success" element={<AuthSuccess />} />
       </Routes>
       <Footer />
     </BrowserRouter>
