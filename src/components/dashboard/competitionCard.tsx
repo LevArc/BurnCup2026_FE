@@ -66,6 +66,7 @@ interface Team {
   competition: Competition;
   members: TeamMember[];
   teamLeader: TeamMember;
+  remainingSlot: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -103,7 +104,7 @@ const getEmailFromToken = (token: string | null): string | null => {
 
 // --- Component ---
 const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
-  const { competition, teamLeader, members, isPaid, teamName, teamCode } = team;
+  const { competition, teamLeader, members, isPaid, teamName, teamCode, remainingSlot } = team;
   const allMembers = [teamLeader, ...members];
 
   // State to hold the logged-in user's email
@@ -259,7 +260,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     <div className="font-sans text-[#3c2f25] max-w-6xl relative">
       <div className="bg-[#dfcbb2] border-4 border-[#4a3f35] rounded-lg shadow-[6px_6px_0px_#4a3f35] flex flex-col overflow-hidden">
 
-  {/* Header */}
+        {/* Header */}
 
         <div className="bg-[#6b442b] text-white p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
 
@@ -368,7 +369,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                       <span className="text-xs text-gray-600 mt-1">Please complete payment</span>
                     </div>
                   )}
-                  
+
                   {/* Refresh Button */}
                   {!isQrLoading && (
                     <button
@@ -385,7 +386,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
 
             <div className="w-full max-w-[280px] space-y-3">
               <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
-                {competition.teamSlot} slot(s) left
+                {Math.max(0, remainingSlot)} slot(s) left
               </div>
               {!isPaid && (
                 <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
@@ -513,8 +514,8 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               <button
                 onClick={handleCloseNotification}
                 className={`px-5 py-2.5 text-sm font-bold text-white border-2 rounded transition-colors ${notification.type === 'success'
-                    ? 'bg-green-600 border-green-800 hover:bg-green-700'
-                    : 'bg-red-600 border-red-800 hover:bg-red-700'
+                  ? 'bg-green-600 border-green-800 hover:bg-green-700'
+                  : 'bg-red-600 border-red-800 hover:bg-red-700'
                   }`}
               >
                 {notification.type === 'success' ? 'Okay' : 'Close'}

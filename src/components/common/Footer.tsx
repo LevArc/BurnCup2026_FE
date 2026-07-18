@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 
-const FacebookIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.3.2 2.3.2v2.5h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.89h-2.4v6.98A10 10 0 0 0 22 12" />
+const EmailIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
-const TwitterIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.7L4.5 22H1.4l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2Zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20Z" />
+const PhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
   </svg>
 );
 
@@ -54,30 +55,40 @@ export default function Footer() {
         </div>
 
         {/* Contact */}
-        <div className="min-w-[160px]">
+        <div className="min-w-[160px] mr-[4%]">
           <h4 className="text-white mb-4 font-semibold">Contact Us</h4>
-          <p className="text-sm mb-4">hello@burncup2026.id</p>
-          <div className="flex gap-3">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
+          
+          <div className="flex flex-col space-y-3">
+            <a 
+              href="mailto:hello@burncup2026.id" 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <FacebookIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <EmailIcon />
+              </span>
+              burncup@gmail.com
             </a>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
+
+            <a 
+              href="tel:+6281234567890" 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <TwitterIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <PhoneIcon />
+              </span>
+              +62 812-3456-7890
             </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
+
+            <a 
+              href="https://instagram.com/burncup_placeholder" 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <InstagramIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <InstagramIcon />
+              </span>
+              @burncup
             </a>
           </div>
         </div>
