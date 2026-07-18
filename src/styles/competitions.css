@@ -372,4 +372,38 @@ h2, h3 {
 
 @media (max-width: 768px) {
   .tree-left-new, .tree-right-new { display: none; }
+
+  .categories-section {
+    padding: 0;
+  }
+
+  .categories-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .categories-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .categories-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .categories-grid {
+    gap: 16px;
+  }
+
+  .cta-section {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cta-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-section {
+    min-height: auto;
+    padding: 2rem 1.25rem;
+  }
 }
