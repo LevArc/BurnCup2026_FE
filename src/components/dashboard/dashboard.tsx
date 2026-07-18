@@ -77,51 +77,60 @@ export default function DashboardComp() {
               </div>
             ) : user ? (
               <>
-                {/* Avatar (Initials) */}
+                {/* Avatar (Initials fallback to Email if Name is empty) */}
                 <div className="w-20 h-20 bg-[#f97316] text-white flex items-center justify-center text-4xl rounded-md font-medium mb-4 uppercase">
-                  {user.fullName.charAt(0)}
+                  {user.fullName ? user.fullName.charAt(0) : user.email.charAt(0)}
                 </div>
                 
-                {/* Name & Conditional Email */}
-                <h2 className="text-xl font-bold text-center leading-tight mb-1">
-                  {user.fullName}
-                </h2>
-                
-                {(user.userType === 'Binusian' || user.userType === 'SMA/SMK') && (
-                  <p className="text-sm text-gray-600 mb-3 text-center">
-                    {user.email}
-                  </p>
+                {/* Name & Email (Email is mandatory, Name is conditional) */}
+                {user.fullName && (
+                  <h2 className="text-xl font-bold text-center leading-tight mb-1">
+                    {user.fullName}
+                  </h2>
                 )}
                 
-                {/* Badge */}
-                <div className="bg-[#2563eb] text-white text-xs font-semibold px-4 py-1 rounded-full mb-8">
-                  {user.userType}
-                </div>
+                <p className="text-sm text-gray-600 mb-3 text-center">
+                  {user.email}
+                </p>
+                
+                {/* Badge (Conditional) */}
+                {user.userType && (
+                  <div className="bg-[#2563eb] text-white text-xs font-semibold px-4 py-1 rounded-full mb-8">
+                    {user.userType}
+                  </div>
+                )}
                 
                 {/* Details List */}
                 <div className="w-full space-y-4 mb-8 text-sm font-medium">
-                  {/* Phone is shown for all users */}
-                  <div className="flex items-center gap-3">
-                    <Phone size={18} className="text-[#4a3f35]" />
-                    <span>{user.phoneNumber}</span>
-                  </div>
+                  
+                  {/* Phone (Conditional) */}
+                  {user.phoneNumber && (
+                    <div className="flex items-center gap-3">
+                      <Phone size={18} className="text-[#4a3f35]" />
+                      <span>{user.phoneNumber}</span>
+                    </div>
+                  )}
                   
                   {/* Binusian Specific Details */}
                   {user.userType === 'Binusian' && (
                     <>
-                      <div className="flex items-center gap-3">
-                        <UserSquare2 size={18} className="text-[#4a3f35]" />
-                        <span>NIM: {user.nim}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <GraduationCap size={18} className="text-[#4a3f35]" />
-                        <span>{user.major}</span>
-                      </div>
+                      {user.nim && (
+                        <div className="flex items-center gap-3">
+                          <UserSquare2 size={18} className="text-[#4a3f35]" />
+                          <span>NIM: {user.nim}</span>
+                        </div>
+                      )}
+                      {user.major && (
+                        <div className="flex items-center gap-3">
+                          <GraduationCap size={18} className="text-[#4a3f35]" />
+                          <span>{user.major}</span>
+                        </div>
+                      )}
                     </>
                   )}
 
                   {/* SMA/SMK Specific Details */}
-                  {user.userType === 'SMA/SMK' && (
+                  {user.userType === 'SMA/SMK' && user.school && (
                     <div className="flex items-center gap-3">
                       <Building2 size={18} className="text-[#4a3f35]" />
                       <span>{user.school}</span>
@@ -156,7 +165,7 @@ export default function DashboardComp() {
             /* Empty State Layout */
             <div className="flex flex-col items-center justify-center h-full min-h-[500px]">
               <img 
-                src="/fox-empty-state.png" 
+                src="/assets/mascot-register.png" 
                 alt="Confused Fox" 
                 className="w-48 md:w-64 h-auto object-contain mb-6" 
               />
