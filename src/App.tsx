@@ -13,6 +13,8 @@ import AuthSuccess from "./pages/AuthSuccess";
 import RegistrationForm from "./pages/RegisterCompetition";
 import TeamManagement from "./pages/TeamManagement";
 
+import AdminPage from "./pages/admin/AdminPage";
+
 // Competition Category Pages
 import SportCompetitionPage from "./pages/competitions/SportCompetitionPage";
 import ESportCompetitionPage from "./pages/competitions/ESportCompetitionPage";
@@ -31,13 +33,11 @@ function App() {
         <Route path="/competitions/sport" element={<SportCompetitionPage />} />
         <Route path="/competitions/esport" element={<ESportCompetitionPage />} />
         <Route path="/competitions/creative" element={<CreativeCompetitionPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage/>} />
-        <Route path="/competition" element={<CompetitionDetailPage id="2c8cadd2-edec-4fb6-a17b-148e185a48ed" />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/competition" element={<CompetitionDetailPage id="bcf7bbdb-dab9-4e3d-93e7-ced652b2c3cb" />} />
         <Route path="/auth-success" element={<AuthSuccess />} />
         <Route path="/register-competition" element={<RegistrationForm />} />
-        <Route path="/register-team" element={<TeamManagement competitionId="2c8cadd2-edec-4fb6-a17b-148e185a48ed" />} />
+        <Route path="/register-team" element={<TeamManagement competitionId="bcf7bbdb-dab9-4e3d-93e7-ced652b2c3cb" />} />
       </Routes>
       <Footer />
     </BrowserRouter>

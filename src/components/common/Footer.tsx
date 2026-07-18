@@ -21,99 +21,61 @@ const InstagramIcon = () => (
 export default function Footer() {
   return (
     <footer className="relative bg-[#2b180d] text-[#d1bfae] px-6 md:px-16 pt-8 md:pt-12 pb-6 overflow-hidden">
-      {/* Content row */}
+      {/* Main content */}
       <div className="flex flex-col md:flex-row flex-wrap justify-between gap-8 border-b border-[#4a2511] pb-8 mb-6">
-        {/* logo BC */}
-        <div className="flex-[2] min-w-[250px]">
+
+        {/* Brand */}
+        <div className="flex-[2] min-w-[200px] max-w-xs">
           <img
             src="/assets/Logo Burncup.svg"
             alt="Burncup Logo"
-            className="h-28 md:h-28 mb-4"
+            className="h-20 md:h-24 mb-4"
           />
           <p className="text-sm leading-relaxed">
             Ekspedisi kompetisi tahunan yang menjelajahi tiga medan:
             olahraga, e-sports, dan kreativitas.
           </p>
-
-          <div className="flex gap-4 md:gap-8 mt-4">
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">5</strong>
-              Kategori
-            </div>
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">1000+</strong>
-              Peserta
-            </div>
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">2026</strong>
-              Tahun Event
-            </div>
-          </div>
         </div>
 
         {/* Quick Links */}
-        <div className="min-w-[150px]">
+        <div className="min-w-[140px]">
           <h4 className="text-white mb-4 font-semibold">Quick Links</h4>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-sm">
             <li>
-              <Link
-                to="/"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Home
-              </Link>
+              <Link to="/" className="transition-colors hover:text-white">Home</Link>
             </li>
             <li>
-              <Link
-                to="/about"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                About Us
-              </Link>
+              <Link to="/competitions" className="transition-colors hover:text-white">Competitions</Link>
             </li>
             <li>
-              <Link
-                to="/competitions"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Competitions
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/sponsors"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Sponsors
-              </Link>
+              <Link to="/sponsors" className="transition-colors hover:text-white">Sponsors</Link>
             </li>
           </ul>
         </div>
 
         {/* Contact */}
-        <div className="min-w-[150px]">
+        <div className="min-w-[160px]">
           <h4 className="text-white mb-4 font-semibold">Contact Us</h4>
-          <p className="text-sm">hello@burncup2026.id</p>
-
-          <div className="flex gap-3 mt-4">
+          <p className="text-sm mb-4">hello@burncup2026.id</p>
+          <div className="flex gap-3">
             <a
               href="#"
               aria-label="Facebook"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
             >
               <FacebookIcon />
             </a>
             <a
               href="#"
               aria-label="Twitter"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
             >
               <TwitterIcon />
             </a>
             <a
               href="#"
               aria-label="Instagram"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white transition-colors hover:bg-[#6b3518]"
             >
               <InstagramIcon />
             </a>
