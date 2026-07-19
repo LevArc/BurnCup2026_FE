@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/competitions.css';
 
@@ -33,6 +33,14 @@ const esportCompetitions: CompetitionCategory[] = [
 ];
 
 const ESportCompetition: React.FC = () => {
+  const categoriesRef = useRef<HTMLElement>(null);
+  const handleScrollUp = () => {
+    if (categoriesRef.current) {
+      const elementPosition = categoriesRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - 100;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
   return (
     <div className="e-sport-page">
 
@@ -58,7 +66,7 @@ const ESportCompetition: React.FC = () => {
       </section>
 
       {/* ================= CATEGORIES SECTION ================= */}
-      <section className="categories-section">
+      <section className="categories-section" ref={categoriesRef}>
         <div className="categories-wrapper">
           <img src={treeLeft} alt="Tree Left" className="tree-left-new" />
           <img src={treeRight} alt="Tree Right" className="tree-right-new" />
@@ -92,7 +100,7 @@ const ESportCompetition: React.FC = () => {
       {/* ================= CTA SECTION ================= */}
       <section className="cta-section">
         <h2>Join the Competition Now!</h2>
-        <button className="cta-register-btn">Register Now!</button>
+        <button className="cta-register-btn" onClick={handleScrollUp}>Register Now!</button>
       </section>
     </div>
   );

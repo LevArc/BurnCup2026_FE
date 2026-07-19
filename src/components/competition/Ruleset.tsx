@@ -18,7 +18,7 @@ export default function Ruleset({ rules, competitionName }: RulesetProps) {
         {/* Left Section: Given a defined width (w-7/12)*/}
         <div className="w-full md:w-4/12 flex flex-col items-start md:items-start shrink-0">
           <img 
-            src="./competitionBackground/mascotRuleset.png" 
+            src="/competitionBackground/mascotRuleset.png" 
             alt="Mascot" 
             className="h-100% w-auto object-contain object-left" 
           />

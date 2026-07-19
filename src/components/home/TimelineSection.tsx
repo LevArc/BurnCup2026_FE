@@ -42,7 +42,7 @@ export default function TimelineSection() {
       className="relative min-h-screen flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-bottom bg-no-repeat bg-cover"
       style={{
         backgroundImage: "url('/assets/gunung-ijo-timeline.png')",
-        backgroundColor: "#F0E6D2",
+        backgroundColor: "#F4ECD8",
       }}
     >
       <div className="relative z-10 w-full max-w-5xl mx-auto">

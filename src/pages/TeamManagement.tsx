@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Search, Plus, AlertCircle, CheckCircle2, UserCheck, Users } from 'lucide-react';
 
 interface TeamManagementProps {
-  competitionId: string;
+  competitionId?: string;
 }
 
 interface CompetitionDetails {
@@ -11,7 +12,9 @@ interface CompetitionDetails {
   maxMembers: number;
 }
 
-const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId }) => {
+const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }) => {
+  const { id: paramId } = useParams<{ id: string }>();
+  const competitionId = propId ?? paramId ?? '';
   const [activeTab, setActiveTab] = useState<'join' | 'create'>('join');
   const [teamCode, setTeamCode] = useState('');
   const [teamName, setTeamName] = useState('');

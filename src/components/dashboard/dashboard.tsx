@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Phone,
   UserSquare2,
@@ -352,6 +353,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 
 // --- DASHBOARD COMPONENT ---
 export default function DashboardComp() {
+const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -383,6 +385,11 @@ export default function DashboardComp() {
         fetch('http://localhost:8080/api/protected/get-teams', { method: 'GET', headers })
       ]);
 
+      if (userResponse.status === 401 || teamsResponse.status === 401) {
+        localStorage.removeItem('token');
+        navigate('/login');
+        return;
+      }
       if (!userResponse.ok) throw new Error(`User fetch failed: ${userResponse.status}`);
       if (!teamsResponse.ok) throw new Error(`Teams fetch failed: ${teamsResponse.status}`);
 

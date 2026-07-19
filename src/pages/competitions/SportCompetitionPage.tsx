@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/competitions.css';
 
@@ -6,11 +6,9 @@ import '../../styles/competitions.css';
 const heroBackground = '/assets/SportCompetition/hero.png';
 const aboutImage = '/assets/SportCompetition/Sport.png';
 
-// Import Gambar Pohon
 const treeLeft = '/assets/SportCompetition/Tree Left.png';
 const treeRight = '/assets/SportCompetition/Tree Right.png';
 
-// Import Artwork Unik Setiap Kompetisi
 const imgFutsal = '/assets/SportCompetition/Futsal.jpg';
 const imgBasketball = '/assets/SportCompetition/Basketball.jpg';
 const imgVolly = '/assets/SportCompetition/volly.jpg';
@@ -35,6 +33,26 @@ const sportCompetitions: CompetitionCategory[] = [
 ];
 
 const SportCompetition: React.FC = () => {
+  const categoriesRef = useRef<HTMLElement>(null);
+
+  // 1. Updated scroll function with a custom offset
+  const handleScrollUp = () => {
+    if (categoriesRef.current) {
+      // Get the distance from the top of the page to the section
+      const elementPosition = categoriesRef.current.getBoundingClientRect().top;
+      
+      // Calculate the exact position to scroll to, minus an offset. 
+      // Change '150' to make it scroll up more or less!
+      const offset = 100; 
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="sport-page">
 
@@ -50,7 +68,7 @@ const SportCompetition: React.FC = () => {
           <div className="about-text">
             <h2>What's Sport Competition<br/>At Burncup 2026?</h2>
             <p>
-                            The BURNCUP Sport arena is where athleticism, endurance, and teamwork come together.
+              The BURNCUP Sport arena is where athleticism, endurance, and teamwork come together.
               We provide a competitive stage for dedicated athletes to push their limits and
               showcase their physical excellence across a range of traditional and modern sports.
               Every match, every point, and every victory is celebrated in our energetic sporting environment.
@@ -60,7 +78,7 @@ const SportCompetition: React.FC = () => {
       </section>
 
       {/* ================= CATEGORIES SECTION ================= */}
-      <section className="categories-section">
+      <section className="categories-section" ref={categoriesRef}>
         <div className="categories-wrapper">
           <img src={treeLeft} alt="Tree Left" className="tree-left-new" />
           <img src={treeRight} alt="Tree Right" className="tree-right-new" />
@@ -80,7 +98,7 @@ const SportCompetition: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                                    <p>
+                  <p>
                     Prove your athletic excellence at this prestigious event.
                     Compete for the championship title at Burncup 2026.
                   </p>
@@ -94,7 +112,9 @@ const SportCompetition: React.FC = () => {
       {/* ================= CTA SECTION ================= */}
       <section className="cta-section">
         <h2>Join the Competition Now!</h2>
-        <button className="cta-register-btn">Register Now!</button>
+        <button className="cta-register-btn" onClick={handleScrollUp}>
+          Register Now
+        </button>
       </section>
     </div>
   );

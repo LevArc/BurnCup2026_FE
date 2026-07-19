@@ -7,7 +7,7 @@ import TimelineSection from "../components/home/TimelineSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#F0E6D2] overflow-x-hidden">
+    <main className="min-h-screen bg-[#F4ECD8] overflow-x-hidden">
       <Hero />
       <AboutSection />
       <CategorySection />
