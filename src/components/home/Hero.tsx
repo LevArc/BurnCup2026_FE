@@ -10,7 +10,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex items-end justify-center h-[60vh] md:min-h-screen w-full bg-[#F0E6D2] overflow-hidden">
+    <section className="relative flex items-end justify-center h-[60vh] md:min-h-screen w-full bg-[#F4ECD8] overflow-hidden">
       {/* Background Mountain */}
       <img
         src="/assets/mountain-bg.png"

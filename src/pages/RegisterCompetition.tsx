@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { UserCheck, Users, ChevronDown, AlertCircle } from 'lucide-react';
 
 interface FormData {
@@ -11,6 +12,8 @@ interface FormData {
 }
 
 const RegistrationForm: React.FC = () => {
+  const { id: competitionId } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     category: '',
     fullName: '',
@@ -155,7 +158,8 @@ const RegistrationForm: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Profile successfully updated:', data);
-        // Transition to next step here
+        // Navigate to team management with the competition ID
+        navigate(`/register-team/${competitionId}`);
       } else {
         const errorData = await response.json();
         setErrorMessage(`Failed to update profile: ${errorData.error || response.statusText}`);

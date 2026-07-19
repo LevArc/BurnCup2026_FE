@@ -27,7 +27,7 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="relative bg-[#F0E6D2] py-12 md:py-24 overflow-hidden">
+    <section className="relative bg-[#E9DCBB] min-h-screen flex flex-col justify-center overflow-hidden py-12">
       {/* Dekorasi */}
       <img src="/assets/pohon-kiri-atas-home.png" className="absolute left-0 top-0 w-20 md:w-40 z-0" alt="" />
       <img src="/assets/pohon-kiri-bawah-home.png" className="absolute left-0 bottom-0 w-40 z-0" alt="" />
@@ -50,7 +50,7 @@ export default function CategorySection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-10 md:mt-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10 md:mt-14">
           {categories.map(({ id, title, description, bg, path }, index) => (
             <motion.div
               key={id}
@@ -60,7 +60,7 @@ export default function CategorySection() {
             >
               <Link
                 to={path}
-                className="relative rounded-xl overflow-hidden h-64 group cursor-pointer block"
+                className="relative rounded-xl overflow-hidden h-80 md:h-[28rem] group cursor-pointer block"
               >
                 {/* Background image */}
                 <img

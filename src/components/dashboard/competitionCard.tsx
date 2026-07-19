@@ -157,9 +157,9 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to load QR code. Please try again later.');
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.error || 'Failed to load QR code. Please try again later.');
         }
-
         const data: QrResponse = await response.json();
         setQrData(data);
       } catch (error: any) {
@@ -201,7 +201,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
       }
 
       if (!response.ok) {
-        throw new Error(responseData.message || 'Failed to delete team member');
+        throw new Error(responseData.error || responseData.message || 'Failed to delete team member');
       }
 
       // Show success popup

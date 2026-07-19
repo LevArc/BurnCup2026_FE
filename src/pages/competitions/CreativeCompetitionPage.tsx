@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/competitions.css';
 
@@ -33,6 +33,14 @@ const creativeCompetitions: CompetitionCategory[] = [
 ];
 
 const CreativeCompetition: React.FC = () => {
+  const categoriesRef = useRef<HTMLElement>(null);
+  const handleScrollUp = () => {
+    if (categoriesRef.current) {
+      const elementPosition = categoriesRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - 100;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
   return (
     <div className="creative-page">
 
@@ -58,7 +66,7 @@ const CreativeCompetition: React.FC = () => {
       </section>
 
       {/* ================= CATEGORIES SECTION ================= */}
-      <section className="categories-section">
+      <section className="categories-section" ref={categoriesRef}>
         {/* Wrapper to lock tree decorations beside the cards */}
         <div className="categories-wrapper"> 
           <img src={treeLeft} alt="Tree Left" className="tree-left-new" />
@@ -92,7 +100,7 @@ const CreativeCompetition: React.FC = () => {
       {/* ================= CTA SECTION ================= */}
       <section className="cta-section">
         <h2>Join the Competition Now!</h2>
-        <button className="cta-register-btn">Register Now!</button>
+        <button className="cta-register-btn" onClick={handleScrollUp}>Register Now!</button>
       </section>
     </div>
   );

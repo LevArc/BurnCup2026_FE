@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="relative bg-[#F0E6D2] py-20 md:py-28">
+    <section className="relative bg-[#F4ECD8] py-20 md:py-28">
       <div className="w-full max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
 
