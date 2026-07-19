@@ -7,7 +7,8 @@ import {
   Loader2,
   AlertCircle,
   CheckCircle2,
-  X
+  X,
+  RefreshCw
 } from 'lucide-react';
 
 // --- TypeScript Interfaces ---
@@ -65,6 +66,7 @@ interface Team {
   competition: Competition;
   members: TeamMember[];
   teamLeader: TeamMember;
+  remainingSlot: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -102,7 +104,7 @@ const getEmailFromToken = (token: string | null): string | null => {
 
 // --- Component ---
 const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
-  const { competition, teamLeader, members, isPaid, teamName, teamCode } = team;
+  const { competition, teamLeader, members, isPaid, teamName, teamCode, remainingSlot } = team;
   const allMembers = [teamLeader, ...members];
 
   // State to hold the logged-in user's email
@@ -255,37 +257,55 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
   }, [competition]);
 
   return (
-    <div className="font-sans text-[#3c2f25] max-w-5xl relative">
+    <div className="font-sans text-[#3c2f25] max-w-6xl relative">
       <div className="bg-[#dfcbb2] border-4 border-[#4a3f35] rounded-lg shadow-[6px_6px_0px_#4a3f35] flex flex-col overflow-hidden">
 
         {/* Header */}
+
         <div className="bg-[#6b442b] text-white p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
           <div className="flex items-center gap-3">
+
             <h2 className="text-xl font-bold">{competition.name}</h2>
+
             <span className="bg-[#2d3748] text-[10px] px-2 py-0.5 rounded text-gray-200">{competition.competitionType}</span>
+
             <span className="bg-[#2d3748] text-[10px] px-2 py-0.5 rounded text-gray-200">{competition.category}</span>
+
           </div>
+
           <div className="flex items-center gap-4 text-xs font-medium">
+
             <div className="flex flex-col items-end">
+
               <span className="flex items-center gap-1"><MapPin size={12} /> {competition.venue}</span>
+
               <span className="flex items-center gap-1"><Banknote size={12} /> {displayFee.toLocaleString()}</span>
+
             </div>
+
             {isPaid ? (
+
               <span className="text-[#4ade80] font-bold">PAID</span>
+
             ) : (
+
               <span className="text-[#fca5a5] font-bold">UNPAID</span>
+
             )}
+
           </div>
+
         </div>
 
         {/* Body */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 border-b-2 border-[#c2ae95]">
+        <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-10 border-b-2 border-[#c2ae95]">
 
           {/* Timers Section */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <h3 className="text-xs font-bold text-center mb-2 text-[#4a3f35]">REGISTRATION ENDS IN</h3>
-              <div className="flex justify-center gap-2">
+              <h3 className="text-sm font-bold text-center mb-3 text-[#4a3f35]">REGISTRATION ENDS IN</h3>
+              <div className="flex justify-center gap-3">
                 <TimerBox value={regTimeLeft.days} label="Days" />
                 <TimerBox value={regTimeLeft.hours} label="Hours" />
                 <TimerBox value={regTimeLeft.minutes} label="Minutes" />
@@ -293,8 +313,8 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               </div>
             </div>
             <div>
-              <h3 className="text-xs font-bold text-center mb-2 text-[#4a3f35]">COMPETITION STARTS IN</h3>
-              <div className="flex justify-center gap-2">
+              <h3 className="text-sm font-bold text-center mb-3 text-[#4a3f35]">COMPETITION STARTS IN</h3>
+              <div className="flex justify-center gap-3">
                 <TimerBox value={compTimeLeft.days} label="Days" />
                 <TimerBox value={compTimeLeft.hours} label="Hours" />
                 <TimerBox value={compTimeLeft.minutes} label="Minutes" />
@@ -305,68 +325,79 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
 
           {/* Payment Info Section */}
           <div className="flex flex-col items-center text-center">
-            <h3 className="text-xs font-bold mb-1 text-[#4a3f35]">PAYMENT STATUS</h3>
-            <p className="text-[10px] mb-3">Registration fee: {displayFee.toLocaleString()}</p>
+            <h3 className="text-base font-bold mb-1 text-[#4a3f35]">PAYMENT STATUS</h3>
+            <p className="text-sm mb-4">Registration fee: {displayFee.toLocaleString()}</p>
 
-            <div className="border-2 border-dashed border-gray-400 bg-opacity-50 p-6 rounded-md mb-4 w-full max-w-[200px] min-h-[140px] flex flex-col items-center justify-center">
+            <div className="border-2 border-dashed border-gray-400 bg-opacity-50 p-6 rounded-md mb-5 w-full max-w-[280px] min-h-[200px] flex flex-col items-center justify-center">
               {isPaid ? (
                 <>
-                  <Check size={40} className="text-black mb-2" />
-                  <span className="text-sm font-bold">Payment Completed</span>
-                  <span className="text-[10px] text-gray-600">{competition.paidMessage}</span>
+                  <Check size={56} className="text-black mb-3" />
+                  <span className="text-lg font-bold">Payment Completed</span>
+                  <span className="text-xs text-gray-600 mt-1">{competition.paidMessage}</span>
                 </>
               ) : (
                 <>
                   {isQrLoading ? (
                     <div className="flex flex-col items-center text-gray-600">
-                      <Loader2 size={32} className="animate-spin mb-2" />
-                      <span className="text-xs font-semibold">Generating QR...</span>
+                      <Loader2 size={40} className="animate-spin mb-3" />
+                      <span className="text-sm font-semibold">Generating QR...</span>
                     </div>
                   ) : qrError ? (
                     <div className="flex flex-col items-center text-red-800">
-                      <AlertCircle size={32} className="mb-2 text-red-600" />
-                      <span className="text-xs font-semibold">Error Loading QR</span>
-                      <span className="text-[10px] mt-1 leading-tight">{qrError}</span>
+                      <AlertCircle size={40} className="mb-3 text-red-600" />
+                      <span className="text-sm font-semibold">Error Loading QR</span>
+                      <span className="text-xs mt-2 leading-tight">{qrError}</span>
                     </div>
                   ) : qrData?.qrLink ? (
                     <div className="flex flex-col items-center">
                       <img
                         src={qrData.qrLink}
                         alt="Payment QR Code"
-                        className="w-32 h-32 object-contain mb-2 rounded"
+                        className="w-48 h-48 object-contain mb-3 rounded"
                       />
-                      <span className="text-xs font-bold">Scan to Pay</span>
+                      <span className="text-base font-bold">Scan to Pay</span>
                       {qrData.expiryTime && (
-                        <span className="text-[9px] text-gray-600 mt-1">
+                        <span className="text-xs text-gray-600 mt-1">
                           Expires: {new Date(qrData.expiryTime).toLocaleString()}
                         </span>
                       )}
                     </div>
                   ) : (
-                    <>
-                      <Banknote size={40} className="text-gray-600 mb-2" />
-                      <span className="text-sm font-bold">Pending Payment</span>
-                      <span className="text-[10px] text-gray-600">Please complete payment</span>
-                    </>
+                    <div className="flex flex-col items-center">
+                      <Banknote size={56} className="text-gray-600 mb-3" />
+                      <span className="text-lg font-bold">Pending Payment</span>
+                      <span className="text-xs text-gray-600 mt-1">Please complete payment</span>
+                    </div>
+                  )}
+
+                  {/* Refresh Button */}
+                  {!isQrLoading && (
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="mt-5 flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-100 text-[#4a3f35] border border-gray-300 rounded-md text-sm font-bold transition-colors shadow-sm"
+                    >
+                      <RefreshCw size={16} />
+                      Refresh Status
+                    </button>
                   )}
                 </>
               )}
             </div>
 
-            <div className="w-full max-w-[200px] space-y-2">
-              <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-xs font-semibold py-1 rounded">
-                {competition.teamSlot} slot(s) left
+            <div className="w-full max-w-[280px] space-y-3">
+              <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
+                {Math.max(0, remainingSlot)} slot(s) left
               </div>
               {!isPaid && (
-                <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-[9px] py-1 px-2 rounded leading-tight">
+                <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
                   If there is a problem transfer to BLU ...<br />Send proof of transfer to ...
                 </div>
               )}
             </div>
 
-            <div className="mt-4">
-              <p className="text-[10px] mb-1">Team Code for Reference:</p>
-              <div className="bg-[#658b5b] text-white text-xs font-bold py-1 px-3 rounded shadow-sm">
+            <div className="mt-6">
+              <p className="text-sm mb-2">Team Code for Reference:</p>
+              <div className="bg-[#658b5b] text-white text-lg font-bold py-2 px-5 rounded shadow-sm">
                 {teamCode}
               </div>
             </div>
@@ -374,23 +405,23 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
 
           {/* Team Information Section */}
           <div>
-            <div className="bg-[#eae0d2] border border-[#c2ae95] rounded-md p-4 h-full">
-              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#c2ae95]">
-                <Users size={16} className="text-[#4a3f35]" />
-                <h3 className="text-sm font-bold text-[#4a3f35]">Team Information</h3>
+            <div className="bg-[#eae0d2] border border-[#c2ae95] rounded-md p-6 h-full">
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-[#c2ae95]">
+                <Users size={20} className="text-[#4a3f35]" />
+                <h3 className="text-lg font-bold text-[#4a3f35]">Team Information</h3>
               </div>
-              <div className="space-y-4 text-xs">
+              <div className="space-y-5 text-sm">
                 <div>
-                  <p className="text-gray-500 mb-0.5">Team Name:</p>
-                  <p className="font-semibold text-sm text-[#4a3f35]">{teamName}</p>
+                  <p className="text-gray-500 mb-1">Team Name:</p>
+                  <p className="font-semibold text-base text-[#4a3f35]">{teamName}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 mb-0.5">Team Code:</p>
-                  <p className="font-semibold text-sm text-[#4a3f35]">{teamCode}</p>
+                  <p className="text-gray-500 mb-1">Team Code:</p>
+                  <p className="font-semibold text-base text-[#4a3f35]">{teamCode}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 mb-0.5">Total Members:</p>
-                  <p className="font-semibold text-sm text-[#4a3f35]">{allMembers.length} Player(s)</p>
+                  <p className="text-gray-500 mb-1">Total Members:</p>
+                  <p className="font-semibold text-base text-[#4a3f35]">{allMembers.length} Player(s)</p>
                 </div>
               </div>
             </div>
@@ -399,13 +430,13 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
         </div>
 
         {/* Team Members List */}
-        <div className="p-4 bg-[#d8c3a5]">
-          <div className="flex items-center gap-2 mb-3">
-            <Users size={16} className="text-[#4a3f35]" />
-            <h3 className="text-sm font-bold text-[#4a3f35]">Team Members</h3>
+        <div className="p-6 bg-[#d8c3a5]">
+          <div className="flex items-center gap-3 mb-4">
+            <Users size={20} className="text-[#4a3f35]" />
+            <h3 className="text-lg font-bold text-[#4a3f35]">Team Members</h3>
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             {allMembers.map((member) => {
               // Ensure we check against the email property when determining if this card is the leader
               const isLeaderCard = member.email === teamLeader.email;
@@ -429,11 +460,11 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <div className="bg-[#eae0d2] border-2 border-[#4a3f35] rounded-lg shadow-[4px_4px_0px_#4a3f35] max-w-sm w-full p-6 flex flex-col">
             <div className="flex items-center gap-3 mb-4 text-[#4a3f35]">
-              <AlertCircle size={24} className="text-red-600" />
-              <h3 className="text-lg font-bold">Kick Member?</h3>
+              <AlertCircle size={28} className="text-red-600" />
+              <h3 className="text-xl font-bold">Kick Member?</h3>
             </div>
 
-            <p className="text-sm mb-6 text-[#4a3f35]">
+            <p className="text-base mb-6 text-[#4a3f35]">
               Are you sure you want to kick <strong>{memberToDelete.fullName}</strong> from the team? This action cannot be undone.
             </p>
 
@@ -441,16 +472,16 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               <button
                 onClick={() => setMemberToDelete(null)}
                 disabled={isDeleting}
-                className="px-4 py-2 text-sm font-bold text-[#4a3f35] bg-[#dfcbb2] border-2 border-[#4a3f35] rounded hover:bg-[#d8c3a5] disabled:opacity-50"
+                className="px-5 py-2.5 text-sm font-bold text-[#4a3f35] bg-[#dfcbb2] border-2 border-[#4a3f35] rounded hover:bg-[#d8c3a5] disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteConfirm}
                 disabled={isDeleting}
-                className="px-4 py-2 text-sm font-bold text-white bg-red-600 border-2 border-red-800 rounded hover:bg-red-700 flex items-center gap-2 disabled:opacity-50"
+                className="px-5 py-2.5 text-sm font-bold text-white bg-red-600 border-2 border-red-800 rounded hover:bg-red-700 flex items-center gap-2 disabled:opacity-50"
               >
-                {isDeleting && <Loader2 size={14} className="animate-spin" />}
+                {isDeleting && <Loader2 size={16} className="animate-spin" />}
                 {isDeleting ? 'Kicking...' : 'Kick Member'}
               </button>
             </div>
@@ -466,25 +497,25 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
             <div className={`flex items-center gap-3 mb-4 ${notification.type === 'success' ? 'text-green-700' : 'text-red-700'
               }`}>
               {notification.type === 'success' ? (
-                <CheckCircle2 size={24} />
+                <CheckCircle2 size={28} />
               ) : (
-                <AlertCircle size={24} />
+                <AlertCircle size={28} />
               )}
-              <h3 className="text-lg font-bold">
+              <h3 className="text-xl font-bold">
                 {notification.type === 'success' ? 'Success' : 'Action Failed'}
               </h3>
             </div>
 
-            <p className="text-sm mb-6 text-[#4a3f35]">
+            <p className="text-base mb-6 text-[#4a3f35]">
               {notification.message}
             </p>
 
             <div className="flex justify-end mt-auto">
               <button
                 onClick={handleCloseNotification}
-                className={`px-4 py-2 text-sm font-bold text-white border-2 rounded transition-colors ${notification.type === 'success'
-                    ? 'bg-green-600 border-green-800 hover:bg-green-700'
-                    : 'bg-red-600 border-red-800 hover:bg-red-700'
+                className={`px-5 py-2.5 text-sm font-bold text-white border-2 rounded transition-colors ${notification.type === 'success'
+                  ? 'bg-green-600 border-green-800 hover:bg-green-700'
+                  : 'bg-red-600 border-red-800 hover:bg-red-700'
                   }`}
               >
                 {notification.type === 'success' ? 'Okay' : 'Close'}
@@ -504,9 +535,9 @@ interface TimerBoxProps {
 }
 
 const TimerBox: React.FC<TimerBoxProps> = ({ value, label }) => (
-  <div className="bg-[#2a3040] text-white rounded w-12 h-14 flex flex-col items-center justify-center shadow-md">
-    <span className="text-sm font-bold">{value.toString().padStart(2, '0')}</span>
-    <span className="text-[8px] mt-0.5">{label}</span>
+  <div className="bg-[#2a3040] text-white rounded w-16 h-20 flex flex-col items-center justify-center shadow-md">
+    <span className="text-xl font-bold">{value.toString().padStart(2, '0')}</span>
+    <span className="text-xs mt-1">{label}</span>
   </div>
 );
 
@@ -518,15 +549,15 @@ interface TeamMemberCardProps {
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, isLeaderCard, canDelete, onDelete }) => (
-  <div className="bg-[#ede4d5] border border-[#c2ae95] rounded-md p-2 flex items-center justify-between min-w-[240px] shadow-sm flex-1 md:flex-none relative group">
-    <div className="flex items-center gap-3 overflow-hidden">
-      <div className="w-8 h-8 bg-[#2a4332] text-white rounded flex items-center justify-center text-sm font-bold shrink-0">
+  <div className="bg-[#ede4d5] border border-[#c2ae95] rounded-md p-3 flex items-center justify-between min-w-[260px] shadow-sm flex-1 md:flex-none relative group">
+    <div className="flex items-center gap-4 overflow-hidden">
+      <div className="w-10 h-10 bg-[#2a4332] text-white rounded flex items-center justify-center text-base font-bold shrink-0">
         {member.fullName.charAt(0).toUpperCase()}
       </div>
       <div className="flex flex-col truncate pr-2">
-        <span className="text-xs font-bold text-[#4a3f35] truncate">{member.fullName}</span>
+        <span className="text-sm font-bold text-[#4a3f35] truncate">{member.fullName}</span>
         {isLeaderCard && (
-          <span className="text-[9px] text-[#658b5b] font-bold uppercase">Team Leader</span>
+          <span className="text-[11px] text-[#658b5b] font-bold uppercase mt-0.5">Team Leader</span>
         )}
       </div>
     </div>
@@ -535,9 +566,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, isLeaderCard, c
       <button
         onClick={onDelete}
         title="Kick Member"
-        className="text-red-500 hover:text-red-700 hover:bg-red-100 p-1.5 rounded-full transition-colors shrink-0"
+        className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 rounded-full transition-colors shrink-0"
       >
-        <X size={16} strokeWidth={3} />
+        <X size={20} strokeWidth={3} />
       </button>
     )}
   </div>

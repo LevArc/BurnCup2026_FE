@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const navLinks = [
   { label: "HOME", path: "/" },
   { label: "COMPETITIONS", path: "/competitions" },
-  { label: "SPONSORS", path: "/sponsors" },
 ];
 
 const competitionLinks = [

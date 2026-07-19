@@ -12,7 +12,7 @@ interface FormData {
 
 const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    category: '', 
+    category: '',
     fullName: '',
     nim: '',
     major: '',
@@ -27,11 +27,11 @@ const RegistrationForm: React.FC = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        
+
         const headers: HeadersInit = {
           'Content-Type': 'application/json'
         };
-        
+
         if (token) {
           headers['Authorization'] = `Bearer ${token}`;
         }
@@ -40,13 +40,13 @@ const RegistrationForm: React.FC = () => {
           method: 'GET',
           headers: headers
         });
-        
+
         if (response.ok) {
           const data = await response.json();
-          
+
           let mappedCategory = '';
           const userTypeLower = data.userType?.toLowerCase();
-          
+
           if (userTypeLower === 'binusian') {
             mappedCategory = 'binusian';
           } else if (userTypeLower === 'sma' || userTypeLower === 'sma / smk') {
@@ -87,7 +87,7 @@ const RegistrationForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(''); // Reset errors on new submission attempt
-    
+
     const currentCategory = formData.category.trim().toLowerCase();
 
     // 1. Validation Checks
@@ -116,10 +116,10 @@ const RegistrationForm: React.FC = () => {
         return;
       }
     }
-    
+
     try {
       const token = localStorage.getItem('token');
-      
+
       if (!token) {
         setErrorMessage('No authorization token found. Please log in.');
         return;
@@ -135,7 +135,7 @@ const RegistrationForm: React.FC = () => {
       }
 
       const payload = {
-        userType: formattedUserType, 
+        userType: formattedUserType,
         fullName: formData.fullName.trim() ? formData.fullName.trim() : null,
         phoneNumber: formData.phoneNumber.trim() ? formData.phoneNumber.trim() : null,
         nim: (currentCategory === 'binusian' && formData.nim.trim()) ? formData.nim.trim() : null,
@@ -147,7 +147,7 @@ const RegistrationForm: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload)
       });
@@ -160,7 +160,7 @@ const RegistrationForm: React.FC = () => {
         const errorData = await response.json();
         setErrorMessage(`Failed to update profile: ${errorData.error || response.statusText}`);
       }
-      
+
     } catch (error) {
       console.error('Error submitting form:', error);
       setErrorMessage('An unexpected error occurred. Please try again.');
@@ -168,14 +168,14 @@ const RegistrationForm: React.FC = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen w-full flex flex-col items-center justify-center py-10 px-4 bg-cover bg-bottom font-sans"
-      style={{ 
+      style={{
         backgroundImage: `url('/assets/register-competition-bg.png')`,
         backgroundColor: '#f3ece1'
       }}
     >
-      
+
       {/* --- Progress Indicator --- */}
       <div className="flex items-center gap-4 mb-8 z-10">
         <div className="flex flex-col items-center gap-2 text-center">
@@ -197,7 +197,7 @@ const RegistrationForm: React.FC = () => {
 
       {/* --- Form Container --- */}
       <div className="bg-[#fbf7f0] border border-[#b45309] rounded-xl p-8 max-w-2xl w-full shadow-2xl z-10 relative">
-        
+
         {/* Form Header */}
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-2xl md:text-3xl font-black text-[#3f271d] tracking-wide">
@@ -207,11 +207,11 @@ const RegistrationForm: React.FC = () => {
             Step 1 of 2
           </span>
         </div>
-        
+
         <p className="text-[#3f271d] font-medium mb-4">
           Complete your personal information to continue
         </p>
-        
+
         <hr className="border-[#8C4A15] mb-6" />
 
         {/* Error Banner */}
@@ -224,14 +224,14 @@ const RegistrationForm: React.FC = () => {
 
         {/* Form Fields */}
         <form onSubmit={handleSubmit} className="space-y-5 relative">
-          
+
           {/* Category Dropdown */}
           <div className="relative">
             <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
               Category Status
             </label>
             <div className="relative">
-              <select 
+              <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
@@ -252,7 +252,7 @@ const RegistrationForm: React.FC = () => {
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                 Full Name
               </label>
-              <input 
+              <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
@@ -268,7 +268,7 @@ const RegistrationForm: React.FC = () => {
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   School
                 </label>
-                <input 
+                <input
                   type="text"
                   name="school"
                   value={formData.school}
@@ -285,7 +285,7 @@ const RegistrationForm: React.FC = () => {
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   NIM
                 </label>
-                <input 
+                <input
                   type="text"
                   name="nim"
                   value={formData.nim}
@@ -302,14 +302,37 @@ const RegistrationForm: React.FC = () => {
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   Major (Binusian)
                 </label>
-                <input 
-                  type="text"
-                  name="major"
-                  value={formData.major}
-                  onChange={handleChange}
-                  placeholder="Enter your major"
-                  className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
-                />
+                <div className="relative">
+                  <select
+                    name="major"
+                    // Checks if the fetched major is in the accepted list. If not, defaults to ""
+                    value={[
+                      "Creative Communication",
+                      "Computer Science - Software Engineering",
+                      "Management",
+                      "Business Management",
+                      "Psychology",
+                      "Business Hotel Management",
+                      "Accounting",
+                      "Business Information Technology",
+                      "Digital Business Innovation"
+                    ].includes(formData.major) ? formData.major : ""}
+                    onChange={handleChange}
+                    className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
+                  >
+                    <option value="" disabled>Select your major</option>
+                    <option value="Creative Communication">Creative Communication</option>
+                    <option value="Computer Science - Software Engineering">Computer Science - Software Engineering</option>
+                    <option value="Management">Management</option>
+                    <option value="Business Management">Business Management</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Business Hotel Management">Business Hotel Management</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Business Information Technology">Business Information Technology</option>
+                    <option value="Digital Business Innovation">Digital Business Innovation</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+                </div>
               </div>
             )}
 
@@ -318,7 +341,7 @@ const RegistrationForm: React.FC = () => {
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                 Phone Number
               </label>
-              <input 
+              <input
                 type="text"
                 name="phoneNumber"
                 value={formData.phoneNumber}
@@ -330,13 +353,13 @@ const RegistrationForm: React.FC = () => {
           </div>
 
           {/* Submit Button */}
-          <button 
+          <button
             type="submit"
             className="w-full bg-[#a14714] hover:bg-[#85390f] text-white font-bold text-lg py-3 rounded-lg mt-4 transition-colors duration-200"
           >
             Proceed
           </button>
-          
+
         </form>
       </div>
     </div>
