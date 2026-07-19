@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { 
-  Phone, 
-  UserSquare2, 
-  GraduationCap, 
-  Trophy, 
+import {
+  Phone,
+  UserSquare2,
+  GraduationCap,
+  Trophy,
   Edit,
   Building2,
   X,
@@ -15,7 +15,7 @@ import CompetitionCard from './competitionCard';
 
 interface Team {
   id: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 interface User {
@@ -39,7 +39,7 @@ interface EditProfileModalProps {
 
 const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileModalProps) => {
   const [formData, setFormData] = useState({
-    category: '', 
+    category: '',
     fullName: '',
     nim: '',
     major: '',
@@ -53,7 +53,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
     // Map existing user data to form data format
     let mappedCategory = '';
     const userTypeLower = user.userType?.toLowerCase() || '';
-    
+
     if (userTypeLower === 'binusian') {
       mappedCategory = 'binusian';
     } else if (userTypeLower === 'sma' || userTypeLower === 'sma / smk' || userTypeLower === 'sma/smk') {
@@ -84,7 +84,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage('');
-    
+
     const currentCategory = formData.category.trim().toLowerCase();
 
     // 1. Validation Checks
@@ -113,7 +113,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         return;
       }
     }
-    
+
     try {
       setIsSubmitting(true);
       const token = localStorage.getItem('token');
@@ -133,7 +133,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
       }
 
       const payload = {
-        userType: formattedUserType, 
+        userType: formattedUserType,
         fullName: formData.fullName.trim() ? formData.fullName.trim() : null,
         phoneNumber: formData.phoneNumber.trim() ? formData.phoneNumber.trim() : null,
         nim: (currentCategory === 'binusian' && formData.nim.trim()) ? formData.nim.trim() : null,
@@ -145,7 +145,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload)
       });
@@ -159,7 +159,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         setErrorMessage(errorText);
         onStatus('error', errorText);
       }
-      
+
     } catch (error) {
       console.error('Error submitting form:', error);
       const catchError = 'An unexpected error occurred. Please try again.';
@@ -174,9 +174,9 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
     <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
       {/* Form Container */}
       <div className="bg-[#fbf7f0] border border-[#b45309] rounded-xl p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        
+
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
         >
@@ -189,11 +189,11 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
             Edit Profile
           </h2>
         </div>
-        
+
         <p className="text-[#3f271d] font-medium mb-4">
           Update your personal information below
         </p>
-        
+
         <hr className="border-[#8C4A15] mb-6" />
 
         {/* Inline Error Banner (Validation) */}
@@ -206,14 +206,14 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 
         {/* Form Fields */}
         <form onSubmit={handleSubmit} className="space-y-5 relative">
-          
+
           {/* Category Dropdown */}
           <div className="relative">
             <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
               Category Status
             </label>
             <div className="relative">
-              <select 
+              <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
@@ -234,7 +234,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                 Full Name
               </label>
-              <input 
+              <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
@@ -250,7 +250,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   School
                 </label>
-                <input 
+                <input
                   type="text"
                   name="school"
                   value={formData.school}
@@ -267,7 +267,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   NIM
                 </label>
-                <input 
+                <input
                   type="text"
                   name="nim"
                   value={formData.nim}
@@ -284,23 +284,45 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                   Major (Binusian)
                 </label>
-                <input 
-                  type="text"
-                  name="major"
-                  value={formData.major}
-                  onChange={handleChange}
-                  placeholder="Enter your major"
-                  className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
-                />
+                <div className="relative">
+                  <select
+                    name="major"
+                    value={[
+                      "Creative Communication",
+                      "Computer Science - Software Engineering",
+                      "Management",
+                      "Business Management",
+                      "Psychology",
+                      "Business Hotel Management",
+                      "Accounting",
+                      "Business Information Technology",
+                      "Digital Business Innovation"
+                    ].includes(formData.major) ? formData.major : ""}
+                    onChange={handleChange}
+                    className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
+                  >
+                    <option value="" disabled>Select your major</option>
+                    <option value="Creative Communication">Creative Communication</option>
+                    <option value="Computer Science - Software Engineering">Computer Science - Software Engineering</option>
+                    <option value="Management">Management</option>
+                    <option value="Business Management">Business Management</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Business Hotel Management">Business Hotel Management</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Business Information Technology">Business Information Technology</option>
+                    <option value="Digital Business Innovation">Digital Business Innovation</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+                </div>
               </div>
             )}
-
+            
             {/* Phone Number */}
             <div>
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                 Phone Number
               </label>
-              <input 
+              <input
                 type="text"
                 name="phoneNumber"
                 value={formData.phoneNumber}
@@ -312,16 +334,15 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
           </div>
 
           {/* Submit Button */}
-          <button 
+          <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full text-white font-bold text-lg py-3 rounded-lg mt-4 transition-colors duration-200 ${
-              isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a14714] hover:bg-[#85390f]'
-            }`}
+            className={`w-full text-white font-bold text-lg py-3 rounded-lg mt-4 transition-colors duration-200 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a14714] hover:bg-[#85390f]'
+              }`}
           >
             {isSubmitting ? 'Saving...' : 'Save Changes'}
           </button>
-          
+
         </form>
       </div>
     </div>
@@ -335,9 +356,9 @@ export default function DashboardComp() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-  
+
   // Notification State
-  const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
+  const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null);
 
   // Helper to trigger notification popup
   const showNotification = (type: 'success' | 'error', message: string) => {
@@ -361,13 +382,13 @@ export default function DashboardComp() {
         fetch('http://localhost:8080/api/protected/get-current-user', { method: 'GET', headers }),
         fetch('http://localhost:8080/api/protected/get-teams', { method: 'GET', headers })
       ]);
-      
+
       if (!userResponse.ok) throw new Error(`User fetch failed: ${userResponse.status}`);
       if (!teamsResponse.ok) throw new Error(`Teams fetch failed: ${teamsResponse.status}`);
-      
+
       const userData = await userResponse.json();
       const teamsData = await teamsResponse.json();
-      
+
       setUser(userData);
       setTeams(teamsData);
     } catch (error) {
@@ -383,18 +404,17 @@ export default function DashboardComp() {
 
   const handleEditSuccess = () => {
     setIsEditModalOpen(false);
-    fetchDashboardData(); 
+    fetchDashboardData();
   };
 
   return (
     <div className="min-h-screen bg-[#f4efe5] p-4 md:p-8 font-sans text-[#3c2f25] relative">
-      
+
       {/* Toast Notification Popup (Centered) */}
       {notification && (
-        <div 
-          className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-4 rounded-lg shadow-xl text-white font-medium transition-all duration-300 opacity-100 ${
-            notification.type === 'success' ? 'bg-[#16a34a] border border-[#14532d]' : 'bg-[#dc2626] border border-[#7f1d1d]'
-          }`}
+        <div
+          className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-4 rounded-lg shadow-xl text-white font-medium transition-all duration-300 opacity-100 ${notification.type === 'success' ? 'bg-[#16a34a] border border-[#14532d]' : 'bg-[#dc2626] border border-[#7f1d1d]'
+            }`}
         >
           {notification.type === 'success' ? (
             <CheckCircle2 className="w-6 h-6 text-white" />
@@ -402,7 +422,7 @@ export default function DashboardComp() {
             <AlertCircle className="w-6 h-6 text-white" />
           )}
           <span>{notification.message}</span>
-          <button 
+          <button
             onClick={() => setNotification(null)}
             className="ml-4 text-white/80 hover:text-white transition-colors"
           >
@@ -413,20 +433,20 @@ export default function DashboardComp() {
 
       {/* Modal Popup overlay */}
       {isEditModalOpen && user && (
-        <EditProfileModal 
-          user={user} 
-          onClose={() => setIsEditModalOpen(false)} 
-          onSuccess={handleEditSuccess} 
+        <EditProfileModal
+          user={user}
+          onClose={() => setIsEditModalOpen(false)}
+          onSuccess={handleEditSuccess}
           onStatus={showNotification}
         />
       )}
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 mt-[5%]">
-        
+
         {/* Left Column: Profile Card */}
         <div className="w-full lg:w-1/3 xl:w-1/4">
           <div className="bg-[#dfcbb2] border-4 border-[#4a3f35] rounded-lg shadow-[6px_6px_0px_#4a3f35] p-6 flex flex-col items-center">
-            
+
             {loading ? (
               <div className="flex flex-col items-center justify-center h-48">
                 <p className="font-medium text-[#4a3f35]">Loading Profile...</p>
@@ -436,23 +456,23 @@ export default function DashboardComp() {
                 <div className="w-20 h-20 bg-[#f97316] text-white flex items-center justify-center text-4xl rounded-md font-medium mb-4 uppercase">
                   {user.fullName ? user.fullName.charAt(0) : user.email.charAt(0)}
                 </div>
-                
+
                 {user.fullName && (
                   <h2 className="text-xl font-bold text-center leading-tight mb-1">
                     {user.fullName}
                   </h2>
                 )}
-                
+
                 <p className="text-sm text-gray-600 mb-3 text-center">
                   {user.email}
                 </p>
-                
+
                 {user.userType && (
                   <div className="bg-[#2563eb] text-white text-xs font-semibold px-4 py-1 rounded-full mb-8">
                     {user.userType}
                   </div>
                 )}
-                
+
                 <div className="w-full space-y-4 mb-8 text-sm font-medium">
                   {user.phoneNumber && (
                     <div className="flex items-center gap-3">
@@ -460,7 +480,7 @@ export default function DashboardComp() {
                       <span>{user.phoneNumber}</span>
                     </div>
                   )}
-                  
+
                   {user.userType === 'Binusian' && (
                     <>
                       {user.nim && (
@@ -496,8 +516,8 @@ export default function DashboardComp() {
                 <p className="font-medium text-red-600">Failed to load profile.</p>
               </div>
             )}
-            
-            <button 
+
+            <button
               onClick={() => setIsEditModalOpen(true)}
               className="w-full bg-[#2a4332] hover:bg-[#1f3225] text-white py-3 rounded-md flex items-center justify-center gap-2 font-medium transition-colors border-2 border-[#1f3225] mt-auto"
             >
@@ -513,15 +533,15 @@ export default function DashboardComp() {
             <p className="text-lg font-medium text-[#5c4a3d]">Loading competitions...</p>
           ) : teams.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full min-h-[500px]">
-              <img 
-                src="/assets/mascot-register.png" 
-                alt="Confused Fox" 
-                className="w-48 md:w-64 h-auto object-contain mb-6" 
+              <img
+                src="/assets/mascot-register.png"
+                alt="Confused Fox"
+                className="w-48 md:w-64 h-auto object-contain mb-6"
               />
               <p className="text-lg font-medium text-[#3c2f25]">
                 You have no competition yet!{' '}
-                <a 
-                  href="/competitions" 
+                <a
+                  href="/competitions"
                   className="text-[#ea580c] underline hover:text-orange-700 transition-colors font-semibold"
                 >
                   Register Now!
@@ -541,7 +561,7 @@ export default function DashboardComp() {
             </>
           )}
         </div>
-        
+
       </div>
     </div>
   );

@@ -48,9 +48,6 @@ export default function Footer() {
             <li>
               <Link to="/competitions" className="transition-colors hover:text-white">Competitions</Link>
             </li>
-            <li>
-              <Link to="/sponsors" className="transition-colors hover:text-white">Sponsors</Link>
-            </li>
           </ul>
         </div>
 
