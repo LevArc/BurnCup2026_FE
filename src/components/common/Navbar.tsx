@@ -27,10 +27,11 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const profileRef = useRef<HTMLDivElement | null>(null);
 
   const hasHero = HERO_PAGES.includes(location.pathname);
-  const isCollapsed = hasHero && !isScrolled;
+  const isCollapsed = hasHero && !isScrolled && !isMobile;
   const isCompetitionsRoute = [
     "/competitions",
     "/competitions/creative",
@@ -55,6 +56,13 @@ export default function Navbar() {
   useEffect(() => {
     if (isCollapsed) setMenuOpen(false);
   }, [isCollapsed]);
+
+  //Listener to update mobile state on window resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Re-check auth token whenever the route changes
   useEffect(() => {
@@ -98,11 +106,10 @@ export default function Navbar() {
     <div className="fixed top-0 left-0 right-0 z-50 mx-3 sm:mx-4 md:mx-6 mt-3 sm:mt-4">
       {/* Navbar — collapse saat di hero */}
       <nav
-        className={`rounded-full px-3 sm:px-5 md:px-8 flex justify-between items-center gap-2 transition-all duration-500 ease-in-out ${
-          isCollapsed
+        className={`rounded-full px-3 sm:px-5 md:px-8 flex justify-between items-center gap-2 transition-all duration-500 ease-in-out ${isCollapsed
             ? "bg-transparent shadow-none py-0 opacity-0 pointer-events-none -translate-y-full"
             : "bg-linear-to-b from-[#4A2E1A] to-[#6B4423] shadow-lg py-2 opacity-100 pointer-events-auto translate-y-0"
-        }`}
+          }`}
       >
         {/* Logo */}
         <Link to="/" className="shrink-0">
@@ -122,11 +129,10 @@ export default function Navbar() {
                 <div key={link.path} className="relative group">
                   <button
                     type="button"
-                    className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                      isCompetitionsRoute
+                    className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${isCompetitionsRoute
                         ? "border-b-2 border-orange-400 pb-0.5"
                         : "hover:text-orange-300"
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </button>
@@ -156,9 +162,8 @@ export default function Navbar() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                  isActive ? "border-b-2 border-orange-400 pb-0.5" : "hover:text-orange-300"
-                }`}
+                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${isActive ? "border-b-2 border-orange-400 pb-0.5" : "hover:text-orange-300"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -169,11 +174,10 @@ export default function Navbar() {
               {/* Dashboard link — only when authenticated */}
               <Link
                 to="/dashboard"
-                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                  location.pathname === "/dashboard"
+                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${location.pathname === "/dashboard"
                     ? "border-b-2 border-orange-400 pb-0.5"
                     : "hover:text-orange-300"
-                }`}
+                  }`}
               >
                 DASHBOARD
               </Link>
@@ -305,9 +309,8 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                  isActive ? "text-orange-400" : "hover:text-orange-300"
-                }`}
+                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${isActive ? "text-orange-400" : "hover:text-orange-300"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -319,9 +322,8 @@ export default function Navbar() {
               <Link
                 to="/dashboard"
                 onClick={() => setMenuOpen(false)}
-                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${
-                  location.pathname === "/dashboard" ? "text-orange-400" : "hover:text-orange-300"
-                }`}
+                className={`text-white uppercase text-sm tracking-wide transition-all duration-200 ${location.pathname === "/dashboard" ? "text-orange-400" : "hover:text-orange-300"
+                  }`}
               >
                 DASHBOARD
               </Link>
