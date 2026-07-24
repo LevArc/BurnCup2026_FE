@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import CompetitionCard from './competitionCard';
+import API_URL from '../../lib/api';
 
 interface Team {
   id: string;
@@ -142,7 +143,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
       };
 
-      const response = await fetch('${API_URL}/api/protected/create-update-user-profile', {
+      const response = await fetch(`${API_URL}/api/protected/create-update-user-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -317,7 +318,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 </div>
               </div>
             )}
-            
+
             {/* Phone Number */}
             <div>
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
@@ -353,7 +354,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 
 // --- DASHBOARD COMPONENT ---
 export default function DashboardComp() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -381,8 +382,8 @@ const navigate = useNavigate();
 
     try {
       const [userResponse, teamsResponse] = await Promise.all([
-        fetch('${API_URL}/api/protected/get-current-user', { method: 'GET', headers }),
-        fetch('${API_URL}/api/protected/get-teams', { method: 'GET', headers })
+        fetch(`${API_URL}/api/protected/get-current-user`, { method: 'GET', headers }),
+        fetch(`${API_URL}/api/protected/get-teams`, { method: 'GET', headers })
       ]);
 
       if (userResponse.status === 401 || teamsResponse.status === 401) {

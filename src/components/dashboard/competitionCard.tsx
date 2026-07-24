@@ -180,7 +180,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('${API_URL}/api/protected/delete-team-member', {
+      const response = await fetch(`${API_URL}/api/protected/delete-team-member`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
