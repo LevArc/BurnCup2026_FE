@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../../lib/api';
 import {
   MapPin,
   Banknote,
@@ -148,7 +149,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch(`http://localhost:8080/api/protected/get-qr-link/${teamCode}`, {
+        const response = await fetch(`${API_URL}/api/protected/get-qr-link/${teamCode}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -179,7 +180,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/api/protected/delete-team-member', {
+      const response = await fetch('${API_URL}/api/protected/delete-team-member', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

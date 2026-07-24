@@ -93,7 +93,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="text-center text-xs opacity-70">
-        <p>&copy; 2026 BURNCUP Expedition. All rights reserved.</p>
+        <p>&copy; 2026 Burncup Expedition. All rights reserved.</p>
       </div>
     </footer>
   );

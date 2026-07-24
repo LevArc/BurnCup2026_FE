@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../lib/api';
 import { useParams } from 'react-router-dom';
 import { Search, Plus, AlertCircle, CheckCircle2, UserCheck, Users } from 'lucide-react';
 
@@ -31,7 +32,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
       if (!competitionId) return;
 
       try {
-        const response = await fetch(`http://localhost:8080/api/competitions/${competitionId}`);
+        const response = await fetch(`${API_URL}/api/competitions/${competitionId}`);
         if (response.ok) {
           const data = await response.json();
           setCompDetails({
@@ -75,7 +76,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
         competitionId: competitionId
       };
 
-      const response = await fetch('http://localhost:8080/api/protected/join-team', {
+      const response = await fetch('${API_URL}/api/protected/join-team', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +124,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
         teamName: teamName.trim()
       };
 
-      const response = await fetch('http://localhost:8080/api/protected/create-team', {
+      const response = await fetch('${API_URL}/api/protected/create-team', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

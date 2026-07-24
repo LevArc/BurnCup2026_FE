@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserCheck, Users, ChevronDown, AlertCircle } from 'lucide-react';
+import API_URL from '../lib/api';
 
 interface FormData {
   category: string;
@@ -39,7 +40,7 @@ const RegistrationForm: React.FC = () => {
           headers['Authorization'] = `Bearer ${token}`;
         }
 
-        const response = await fetch('http://localhost:8080/api/protected/get-current-user', {
+        const response = await fetch(`${API_URL}/api/protected/get-current-user`, {
           method: 'GET',
           headers: headers
         });
@@ -146,7 +147,7 @@ const RegistrationForm: React.FC = () => {
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
       };
 
-      const response = await fetch('http://localhost:8080/api/protected/create-update-user-profile', {
+      const response = await fetch(`${API_URL}/api/protected/create-update-user-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

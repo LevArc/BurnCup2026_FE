@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import API_URL from "../lib/api";
 
 import CompetitionHero from "../components/competition/Hero";
 import Description from "../components/competition/Description";
@@ -43,7 +44,7 @@ export default function Competition({ id }: CompetitionProps) {
     useEffect(() => {
         const fetchCompetitionData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/competitions/${id}`);
+                const response = await fetch(`${API_URL}/api/competitions/${id}`);
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch competition data");
