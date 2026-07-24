@@ -14,11 +14,12 @@ export default function AboutSection() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative z-10 bg-[#6B4423] rounded-2xl p-8 md:p-12 shadow-xl w-full md:w-3/4 flex-shrink-0"
           >
-            <h2 className="text-yellow-400 font-extrabold text-3xl md:text-5xl font-['Plus_Jakarta_Sans']">
-              What is BurnCup?
+            {/* Change font-extrabold to font-normal */}
+            <h2 className="text-yellow-400 font-normal text-3xl md:text-5xl font-['Alfa_Slab_One']">
+              What is BURNCUP?
             </h2>
-            <p className="text-white/90 text-base leading-relaxed mt-4">
-              BurnCup adalah ekspedisi kompetisi tahunan yang mengajak peserta
+            <p className="text-white/90 text-base leading-relaxed mt-4 font-['Plus_Jakarta_Sans']">
+              BURNCUP adalah ekspedisi kompetisi tahunan yang mengajak peserta
               menjelajahi empat medan berbeda: olahraga, kreativitas, teknologi,
               dan otomotif. Setiap kategori dirancang layaknya jalur pendakian:
               penuh tantangan, kejutan, dan hadiah di setiap pos pemberhentian.

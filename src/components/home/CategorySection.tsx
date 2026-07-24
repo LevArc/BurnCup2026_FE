@@ -40,10 +40,10 @@ export default function CategorySection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#3B2A1A]">
+          <h2 className="text-3xl md:text-4xl font-normal text-center text-[#3B2A1A] font-['Alfa_Slab_One']">
             Competition Categories
           </h2>
-          <p className="mt-3 max-w-md mx-auto text-gray-600 text-sm text-center">
+          <p className="mt-3 max-w-md mx-auto text-gray-600 text-sm text-center font-['Plus_Jakarta_Sans']">
             Tiga medan, tiga tantangan berbeda. Pilih jalur yang paling sesuai
             dengan keahlian timmu.
           </p>
@@ -74,14 +74,14 @@ export default function CategorySection() {
 
                 {/* Content — slide up saat hover */}
                 <div className="relative z-10 flex flex-col items-center justify-end h-full text-center px-4 pb-6 gap-2 translate-y-2 group-hover:-translate-y-1 transition-transform duration-300">
-                  <h3 className="text-white font-bold text-xl drop-shadow">{title}</h3>
+                  <h3 className="text-white font-normal text-xl drop-shadow font-['Alfa_Slab_One']">{title}</h3>
                   {/* Description muncul saat hover */}
-                  <p className="text-white/80 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-[180px]">
+                  <p className="text-white/80 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-[180px] font-['Plus_Jakarta_Sans']">
                     {description}
                   </p>
                   {/* Explore button */}
                   <div className="flex items-center gap-1 mt-1 border border-white/40 rounded-full px-3 py-1 bg-white/10 group-hover:bg-white/25 group-hover:border-white/70 transition-all duration-300">
-                    <span className="text-white text-xs font-semibold tracking-wide">Explore</span>
+                    <span className="text-white text-xs font-normal tracking-wide font-['Alfa_Slab_One']">Explore</span>
                     <svg
                       width="12"
                       height="12"

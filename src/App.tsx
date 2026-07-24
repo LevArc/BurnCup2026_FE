@@ -20,7 +20,7 @@ import ESportCompetitionPage from "./pages/competitions/ESportCompetitionPage";
 import CreativeCompetitionPage from "./pages/competitions/CreativeCompetitionPage";
 
 // Placeholder competition ID — replace each with the real ID from DB
-const PLACEHOLDER_ID = "bcf7bbdb-dab9-4e3d-93e7-ced652b2c3cb";
+const PLACEHOLDER_ID = "3fcaa103-70ba-4efa-b775-f5ed550c6041";
 
 const COMPETITION_IDS: Record<string, string> = {
   // Sport
@@ -40,7 +40,7 @@ const COMPETITION_IDS: Record<string, string> = {
   "modern-dance":      PLACEHOLDER_ID,
   "traditional-dance": PLACEHOLDER_ID,
   cosplay:             PLACEHOLDER_ID,
-  "cake-decoration":   PLACEHOLDER_ID,
+  "cookie-decoration":   PLACEHOLDER_ID,
   band:                PLACEHOLDER_ID,
 };
 
@@ -80,7 +80,7 @@ function App() {
         <Route path="/competitions/modern-dance"      element={<CompetitionDetailPage id={COMPETITION_IDS["modern-dance"]} />} />
         <Route path="/competitions/traditional-dance" element={<CompetitionDetailPage id={COMPETITION_IDS["traditional-dance"]} />} />
         <Route path="/competitions/cosplay"           element={<CompetitionDetailPage id={COMPETITION_IDS["cosplay"]} />} />
-        <Route path="/competitions/cake-decoration"   element={<CompetitionDetailPage id={COMPETITION_IDS["cake-decoration"]} />} />
+        <Route path="/competitions/cookie-decoration"   element={<CompetitionDetailPage id={COMPETITION_IDS["cookie-decoration"]} />} />
         <Route path="/competitions/band"              element={<CompetitionDetailPage id={COMPETITION_IDS["band"]} />} />
 
         {/* Protected routes */}

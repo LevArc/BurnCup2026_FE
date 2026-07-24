@@ -58,7 +58,7 @@ export default function TimelineSection() {
             Event Timeline
           </h2>
           <p className="text-gray-600 text-sm max-w-md mx-auto">
-            Ikuti jejak jalur ekspedisi BurnCup 2026 dari titik awal
+            Ikuti jejak jalur ekspedisi BURNCUP 2026 dari titik awal
             pendaftaran hingga garis akhir final.
           </p>
         </motion.div>
