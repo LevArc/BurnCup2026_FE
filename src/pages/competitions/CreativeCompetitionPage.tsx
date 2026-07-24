@@ -28,7 +28,7 @@ const creativeCompetitions: CompetitionCategory[] = [
   { id: 'c1', title: 'Modern Dance', image: imgModernDance, path: '/competitions/modern-dance' },
   { id: 'c2', title: 'Traditional Dance', image: imgTraditionalDance, path: '/competitions/traditional-dance' },
   { id: 'c3', title: 'Cosplay', image: imgCosplay, path: '/competitions/cosplay' },
-  { id: 'c4', title: 'Cake Decoration', image: imgCakeDecoration, path: '/competitions/cake-decoration' },
+  { id: 'c4', title: 'Cookies Decoration', image: imgCakeDecoration, path: '/competitions/cookie-decoration' },
   { id: 'c5', title: 'Band', image: imgBand, path: '/competitions/band' },
 ];
 
@@ -54,7 +54,7 @@ const CreativeCompetition: React.FC = () => {
             <img src={aboutImage} alt="About Competition" className="about-image" />
           </div>
           <div className="about-text">
-            <h2>What's Creative Competition<br/>At Burncup 2026?</h2>
+            <h2>What's Creative Competition At Burncup 2026?</h2>
             <p>
                             The BURNCUP Creative arena is where imagination, artistry, and passion take center stage.
                             We provide an inspiring platform for talented individuals to express themselves and
