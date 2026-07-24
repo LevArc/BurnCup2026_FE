@@ -15,7 +15,7 @@ export default function AdminPage() {
 
     // Hit any admin endpoint to check if user is admin
     // If BE returns 403, user is not admin
-    fetch("http://localhost:8080/api/admin/basic-info", {
+    fetch("${API_URL}/api/admin/basic-info", {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       if (res.status === 403 || res.status === 401) {

@@ -20,7 +20,7 @@ import ESportCompetitionPage from "./pages/competitions/ESportCompetitionPage";
 import CreativeCompetitionPage from "./pages/competitions/CreativeCompetitionPage";
 
 // Placeholder competition ID — replace each with the real ID from DB
-const PLACEHOLDER_ID = "bcf7bbdb-dab9-4e3d-93e7-ced652b2c3cb";
+const PLACEHOLDER_ID = "d6a407f1-624e-4a43-8efb-987292f2e89e";
 
 const COMPETITION_IDS: Record<string, string> = {
   // Sport

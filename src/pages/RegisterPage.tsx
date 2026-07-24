@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/auth.css';
+import API_URL from '../lib/api';
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export default function Register() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +64,7 @@ export default function Register() {
   // NEW: Handler for Google OAuth redirect
   const handleGoogleLogin = () => {
     // Adjust this URL to match your actual Go backend route for GoogleLoginHandler
-    window.location.href = "http://localhost:8080/api/auth/google";
+    window.location.href = `${API_URL}/api/auth/google`;
   };
 
   return (

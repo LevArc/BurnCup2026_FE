@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import API_URL from "../../lib/api";
 import {
   Users, Trophy, BarChart2, Trash2, Plus, Edit, RefreshCw, X, ChevronDown, ChevronUp
 } from "lucide-react";
 
-const API = "http://localhost:8080/api";
+const API = `${API_URL}/api`;
 
 // ===================== TYPES =====================
 interface BasicInfo {

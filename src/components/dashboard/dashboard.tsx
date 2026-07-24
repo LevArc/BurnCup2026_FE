@@ -142,7 +142,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
       };
 
-      const response = await fetch('http://localhost:8080/api/protected/create-update-user-profile', {
+      const response = await fetch('${API_URL}/api/protected/create-update-user-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -381,8 +381,8 @@ const navigate = useNavigate();
 
     try {
       const [userResponse, teamsResponse] = await Promise.all([
-        fetch('http://localhost:8080/api/protected/get-current-user', { method: 'GET', headers }),
-        fetch('http://localhost:8080/api/protected/get-teams', { method: 'GET', headers })
+        fetch('${API_URL}/api/protected/get-current-user', { method: 'GET', headers }),
+        fetch('${API_URL}/api/protected/get-teams', { method: 'GET', headers })
       ]);
 
       if (userResponse.status === 401 || teamsResponse.status === 401) {
