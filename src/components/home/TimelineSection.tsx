@@ -2,28 +2,22 @@ import { motion } from "framer-motion";
 
 const timelineItems = [
   {
-    time: "2026-08-01T00:00:00",
-    title: "Registration Opens",
-    description: "Pendaftaran tim dibuka untuk seluruh kategori kompetisi.",
-    accent: "#F97316",
-  },
-  {
-    time: "2026-09-01T00:00:00",
-    title: "Verification Phase",
-    description: "Verifikasi data peserta dan konfirmasi pembayaran pendaftaran.",
+    time: "2026-07-25T00:00:00",
+    title: "Early Bird Registration",
+    description: "",
     accent: "#16A34A",
   },
   {
-    time: "2026-09-20T00:00:00",
-    title: "Technical Meeting",
-    description: "Pertemuan teknis seluruh tim peserta sebelum kompetisi dimulai.",
-    accent: "#CA8A04",
+    time: "2026-08-02T00:00:00",
+    title: "Reguler Registration",
+    description: "",
+    accent: "#2563EB",
   },
   {
-    time: "2026-10-01T00:00:00",
-    title: "Competition Day",
-    description: "Hari pelaksanaan kompetisi untuk seluruh kategori.",
-    accent: "#2563EB",
+    time: "2026-09-26T00:00:00",
+    title: "Late Registration",
+    description: "",
+    accent: "#F97316",
   },
 ];
 
@@ -57,10 +51,6 @@ export default function TimelineSection() {
           <h2 className="font-black text-[#1A1A1A] mb-3 font-['Alfa_Slab_One'] text-[clamp(2rem,3.4vw,4rem)] font-normal tracking-wide">
             Event Timeline
           </h2>
-          <p className="text-gray-600 text-sm max-w-md mx-auto">
-            Ikuti jejak jalur ekspedisi BURNCUP 2026 dari titik awal
-            pendaftaran hingga garis akhir final.
-          </p>
         </motion.div>
 
         {/* ===================== DESKTOP ===================== */}
@@ -85,18 +75,20 @@ export default function TimelineSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 + index * 0.15 }}
-                  className="w-full bg-[#FAF8F1] border border-black/10 p-5 shadow-sm hover:shadow-md transition-shadow duration-300 mx-2 min-h-[160px]"
+                  className="w-full bg-[#FAF8F1] border border-black/10 p-5 shadow-sm hover:shadow-md transition-shadow duration-300 mx-2 min-h-[160px] flex flex-col items-center justify-center text-center"
                   style={{ borderTop: `4px solid ${item.accent}` }}
                 >
-                  <p className="text-[10px] font-bold tracking-wider mb-2 text-[#5A5A5A]">
+                  <p className="text-xl font-bold tracking-wider mb-2 text-[#5A5A5A]">
                     {formatDate(item.time)}
                   </p>
-                  <h3 className="text-sm font-black text-[#1A1A1A] mb-2 font-serif leading-snug">
+                  <h3 className="text-2xl font-black text-[#1A1A1A] mb-2 font-serif leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">
-                    {item.description}
-                  </p>
+                  {item.description && (
+                    <p className="text-base text-gray-500 leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
                 </motion.div>
               </div>
 
@@ -138,18 +130,20 @@ export default function TimelineSection() {
 
               {/* Right: card */}
               <div
-                className="flex-1 bg-[#FAF8F1] border border-black/10 p-4 shadow-sm mb-4"
+                className="flex-1 bg-[#FAF8F1] border border-black/10 p-4 shadow-sm mb-4 flex flex-col items-center justify-center text-center min-h-[120px]"
                 style={{ borderLeft: `4px solid ${item.accent}` }}
               >
-                <p className="text-[10px] font-bold tracking-wider mb-1 text-[#5A5A5A]">
+                <p className="text-sm font-bold tracking-wider mb-1 text-[#5A5A5A]">
                   {formatDate(item.time)}
                 </p>
-                <h3 className="text-sm font-black text-[#1A1A1A] mb-1 font-serif">
+                <h3 className="text-base md:text-lg font-black text-[#1A1A1A] mb-1 font-serif">
                   {item.title}
                 </h3>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  {item.description}
-                </p>
+                {item.description && (
+                  <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
               </div>
             </motion.div>
           ))}

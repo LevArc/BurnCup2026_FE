@@ -5,21 +5,21 @@ const categories = [
   {
     id: "sport",
     title: "Sport",
-    description: "Basket, badminton, futsal & cabang olahraga lapangan lainnya.",
+    description: "Basketball, futsal & other field sports.",
     bg: "/assets/foto-about-sport.JPG",
     path: "/competitions/sport",
   },
   {
     id: "esport",
     title: "E - Sport",
-    description: "Mobile legends, valorant & berbagai cabang esport kompetitif.",
+    description: "Mobile Legends, Valorant & various competitive esports.",
     bg: "/assets/e-sport-bg.JPG",
     path: "/competitions/esport",
   },
   {
     id: "creative",
     title: "Creative",
-    description: "Desain, fotografi, musik & berbagai cabang seni kreatif.",
+    description: "Band, Cosplay & various creative arts.",
     bg: "/assets/creative-bg.jpg",
     path: "/competitions/creative",
   },
@@ -40,12 +40,11 @@ export default function CategorySection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-3xl md:text-4xl font-normal text-center text-[#3B2A1A] font-['Alfa_Slab_One']">
+          <h2 className="text-3xl md:text-7xl font-normal text-center text-[#3B2A1A] font-['Alfa_Slab_One']">
             Competition Categories
           </h2>
-          <p className="mt-3 max-w-md mx-auto text-gray-600 text-sm text-center font-['Plus_Jakarta_Sans']">
-            Tiga medan, tiga tantangan berbeda. Pilih jalur yang paling sesuai
-            dengan keahlian timmu.
+          <p className="mt-3 max-w-md mx-auto text-gray-600 text-lg text-center font-['Plus_Jakarta_Sans']">
+            Discover diverse competition categories designed to showcase your unique talents and skills
           </p>
         </motion.div>
 

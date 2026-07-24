@@ -298,7 +298,10 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                       "Business Hotel Management",
                       "Accounting",
                       "Business Information Technology",
-                      "Digital Business Innovation"
+                      "Digital Business Innovation",
+                      "Minor at Bekasi (Culinary)",
+                      "Minor at Bekasi (Korean)",
+                      "Minor at Bekasi (Free Elective)"
                     ].includes(formData.major) ? formData.major : ""}
                     onChange={handleChange}
                     className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
@@ -313,6 +316,9 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                     <option value="Accounting">Accounting</option>
                     <option value="Business Information Technology">Business Information Technology</option>
                     <option value="Digital Business Innovation">Digital Business Innovation</option>
+                    <option value="Minor at Bekasi (Culinary)">Minor at Bekasi (Culinary)</option>
+                    <option value="Minor at Bekasi (Korean)">Minor at Bekasi (Korean)</option>
+                    <option value="Minor at Bekasi (Free Elective)">Minor at Bekasi (Free Elective)</option>
                   </select>
                   <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
                 </div>

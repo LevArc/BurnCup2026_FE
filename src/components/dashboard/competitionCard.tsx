@@ -332,9 +332,13 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
             <div className="border-2 border-dashed border-gray-400 bg-opacity-50 p-6 rounded-md mb-5 w-full max-w-[280px] min-h-[200px] flex flex-col items-center justify-center">
               {isPaid ? (
                 <>
-                  <Check size={56} className="text-black mb-3" />
-                  <span className="text-lg font-bold">Payment Completed</span>
-                  <span className="text-xs text-gray-600 mt-1">{competition.paidMessage}</span>
+                  <img
+                    src={competition.paidMessage}
+                    alt="WhatsApp Group QR Code"
+                    className="w-48 h-48 object-contain mb-3 rounded"
+                  />
+                  <span className="text-lg font-bold text-center">Payment Completed</span>
+                  <span className="text-xs text-gray-600 mt-1 text-center">Scan to join the WhatsApp group</span>
                 </>
               ) : (
                 <>
@@ -389,7 +393,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
                 {Math.max(0, remainingSlot)} slot(s) left
               </div>
-              {!isPaid && (
+              {!isPaid && remainingSlot>0 &&(
                 <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
                   If there is a problem transfer to <br />BLU 001262346406<br />Send proof of transfer to 0897-9634-277
                 </div>

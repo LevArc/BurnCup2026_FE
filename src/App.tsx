@@ -29,7 +29,7 @@ const COMPETITION_IDS: Record<string, string> = {
   volly:           PLACEHOLDER_ID,
   pingpong:        PLACEHOLDER_ID,
   billiard:        PLACEHOLDER_ID,
-  chess:           PLACEHOLDER_ID,
+  chess:          "0f94c459-1aee-49e8-8016-d50e0c97c7d6",
   // E-Sport
   fifa:            PLACEHOLDER_ID,
   "mobile-legend": PLACEHOLDER_ID,

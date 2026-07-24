@@ -87,9 +87,9 @@ const CreativeCompetition: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                  <p>
+                  {/* <p>
                     Showcase your best talent in this prestigious event. Seize the chance to become the champion of Burncup 2026.
-                  </p>
+                  </p> */}
                 </div>
               </Link>
             ))}
