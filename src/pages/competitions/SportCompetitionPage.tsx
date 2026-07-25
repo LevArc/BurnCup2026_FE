@@ -26,7 +26,7 @@ interface CompetitionCategory {
 const sportCompetitions: CompetitionCategory[] = [
   { id: 'c1', title: 'Futsal', image: imgFutsal, path: '/competitions/futsal' },
   { id: 'c2', title: 'Basketball', image: imgBasketball, path: '/competitions/basketball' },
-  { id: 'c3', title: 'Volly', image: imgVolly, path: '/competitions/volly' },
+  { id: 'c3', title: 'Volleyball', image: imgVolly, path: '/competitions/volleyball' },
   { id: 'c4', title: 'Pingpong', image: imgPingpong, path: '/competitions/pingpong' },
   { id: 'c5', title: 'Billiard', image: imgBilliard, path: '/competitions/billiard' },
   { id: 'c6', title: 'Chess', image: imgChess, path: '/competitions/chess' },
