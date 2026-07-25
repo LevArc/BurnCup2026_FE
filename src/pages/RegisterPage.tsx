@@ -18,11 +18,30 @@ export default function Register() {
     event.preventDefault();
     setError("");
 
+    // 1. Check for empty fields
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
       setError("Semua field wajib diisi.");
       return;
     }
 
+    // 2. Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError("Format email tidak valid.");
+      return;
+    }
+
+    // 3. Validate password length (Min 8, Max 72 for bcrypt)
+    if (password.length < 8) {
+      setError("Password minimal harus 8 karakter.");
+      return;
+    }
+    if (password.length > 72) {
+      setError("Password maksimal 72 karakter.");
+      return;
+    }
+
+    // 4. Validate password confirmation match
     if (password !== confirmPassword) {
       setError("Konfirmasi password tidak cocok.");
       return;
@@ -37,7 +56,7 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
+          email: email.trim(), // Trim email before sending
           password: password,
         }),
       });
@@ -45,7 +64,7 @@ export default function Register() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Registrasi gagal. Silahkan coba lagi.");
+        throw new Error(data.error || data.message || "Registrasi gagal. Silahkan coba lagi.");
       }
 
       setIsSuccess(true);
@@ -60,7 +79,6 @@ export default function Register() {
       setIsLoading(false);
     }
   };
-
   // NEW: Handler for Google OAuth redirect
   const handleGoogleLogin = () => {
     // Adjust this URL to match your actual Go backend route for GoogleLoginHandler
@@ -74,7 +92,7 @@ export default function Register() {
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-10 text-center animate-pulse">
               <div className="mb-4 rounded-full bg-green-100 p-3">
-                <CheckIcon /> 
+                <CheckIcon />
               </div>
               <h2 className="text-xl font-bold text-[#4a2511] mb-2">{successMessage}</h2>
               <p className="text-sm text-[#5e4231]">

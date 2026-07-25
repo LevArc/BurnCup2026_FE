@@ -84,6 +84,12 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    
+    // Prevent typing letters in NIM field right away
+    if (name === 'nim' && value && !/^\d*$/.test(value)) {
+      return; 
+    }
+
     setFormData(prevState => ({
       ...prevState,
       [name]: value
@@ -96,8 +102,9 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
     setErrorMessage('');
 
     const currentCategory = formData.category.trim().toLowerCase();
+    const phoneTrimmed = formData.phoneNumber.trim();
 
-    // 1. Validation Checks
+    // 1. Base Validation Checks
     if (!currentCategory) {
       setErrorMessage('Please select a Category Status.');
       return;
@@ -106,15 +113,33 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
       setErrorMessage('Full Name is required.');
       return;
     }
-    if (!formData.phoneNumber.trim()) {
+    if (!phoneTrimmed) {
       setErrorMessage('Phone Number is required.');
       return;
     }
 
-    // Conditional Validation based on category
+    // 2. Phone Number Validation (10 to 15 digits, allows optional '+' at the start)
+    const cleanedPhone = phoneTrimmed.replace(/[\s-]/g, ''); 
+    const phoneRegex = /^\+?\d{10,15}$/;
+    
+    if (!phoneRegex.test(cleanedPhone)) {
+      setErrorMessage('Please enter a valid phone number (between 10 and 15 digits).');
+      return;
+    }
+
+    // 3. Conditional Validation based on category
     if (currentCategory === 'binusian') {
-      if (!formData.nim.trim() || !formData.major.trim()) {
+      const nimTrimmed = formData.nim.trim();
+
+      if (!nimTrimmed || !formData.major.trim()) {
         setErrorMessage('NIM and Major are required for Binusian.');
+        return;
+      }
+
+      // NIM Validation: Exactly 10 characters and only numbers
+      const nimRegex = /^\d{10}$/;
+      if (!nimRegex.test(nimTrimmed)) {
+        setErrorMessage('NIM must be exactly 10 digits long and contain only numbers.');
         return;
       }
     } else if (currentCategory === 'sma') {
@@ -145,7 +170,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
       const payload = {
         userType: formattedUserType,
         fullName: formData.fullName.trim() ? formData.fullName.trim() : null,
-        phoneNumber: formData.phoneNumber.trim() ? formData.phoneNumber.trim() : null,
+        phoneNumber: cleanedPhone, // Send the cleaned version to backend
         nim: (currentCategory === 'binusian' && formData.nim.trim()) ? formData.nim.trim() : null,
         major: (currentCategory === 'binusian' && formData.major.trim()) ? formData.major.trim() : null,
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
@@ -288,9 +313,10 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 <input
                   type="text"
                   name="nim"
+                  maxLength={10} // Added max length cap
                   value={formData.nim}
                   onChange={handleChange}
-                  placeholder="Enter your NIM"
+                  placeholder="Enter your NIM (10 digits)"
                   className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
                 />
               </div>
@@ -347,11 +373,12 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 Phone Number
               </label>
               <input
-                type="text"
+                type="tel"
                 name="phoneNumber"
+                maxLength={20} // Added generous limit
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                placeholder="Enter your phone number"
+                placeholder="e.g. 0812345678"
                 className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
               />
             </div>
