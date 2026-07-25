@@ -297,6 +297,14 @@ const RegistrationForm: React.FC = () => {
                   placeholder="Enter your school name"
                   className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
                 />
+                {/* INLINE WARNING ADDED HERE */}
+                <div className="mt-2 text-xs text-[#a14714] bg-[#fbf7f0] flex items-start gap-1.5">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  <p>
+                    <strong>Important:</strong> You and your teammates must enter the 
+                    <em> exact same school name and spelling</em> (e.g., "SMAN 1 Jakarta") to join the same team.
+                  </p>
+                </div>
               </div>
             )}
 
