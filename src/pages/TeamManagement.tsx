@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API_URL from '../lib/api';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Search, Plus, AlertCircle, CheckCircle2, UserCheck, Users } from 'lucide-react';
 
 interface TeamManagementProps {
@@ -16,6 +16,7 @@ interface CompetitionDetails {
 const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }) => {
   const { id: paramId } = useParams<{ id: string }>();
   const competitionId = propId ?? paramId ?? '';
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'join' | 'create'>('join');
   const [teamCode, setTeamCode] = useState('');
   const [teamName, setTeamName] = useState('');
@@ -86,10 +87,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setSuccessMessage(data.message || 'Successfully joined the team!');
-        console.log('Joined team:', data);
-        setTeamCode(''); // Clear input on success
+        navigate('/dashboard', { state: { notification: { type: 'success', message: 'Successfully joined the team!' } } });
       } else {
         const errorData = await response.json();
         setErrorMessage(`Failed to join team: ${errorData.error || response.statusText}`);
@@ -134,11 +132,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setSuccessMessage('Team created successfully!');
-        console.log('Team created:', data);
-        
-        setTeamName('');
+        navigate('/dashboard', { state: { notification: { type: 'success', message: 'Team created successfully!' } } });
       } else {
         const errorData = await response.json();
         setErrorMessage(`Failed to create team: ${errorData.error || response.statusText}`);
