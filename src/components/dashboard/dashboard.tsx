@@ -378,7 +378,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 maxLength={20} // Added generous limit
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                placeholder="e.g. +62812345678"
+                placeholder="e.g. 0812345678"
                 className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
               />
             </div>

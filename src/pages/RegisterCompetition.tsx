@@ -56,7 +56,7 @@ const RegistrationForm: React.FC = () => {
 
           if (userTypeLower === 'binusian') {
             mappedCategory = 'binusian';
-          } else if (userTypeLower === 'sma' || userTypeLower === 'sma / smk') {
+          } else if (userTypeLower === 'sma' || userTypeLower === 'sma/smk') {
             mappedCategory = 'sma';
           } else if (userTypeLower === 'public') {
             mappedCategory = 'public';
@@ -407,7 +407,7 @@ const RegistrationForm: React.FC = () => {
                 maxLength={20} // Generous limit in HTML just in case they add spaces/dashes
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                placeholder="e.g. +62812345678"
+                placeholder="e.g. 0812345678"
                 className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
               />
             </div>
