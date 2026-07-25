@@ -1,39 +1,25 @@
-const timelineData = [
-  {
-    id: 1,
-    date: '1 - 30 AGUSTUS 2026',
-    title: 'Registration Opens',
-    description: 'Pendaftaran tim dibuka untuk seluruh kategori kompetisi.',
-    borderColor: 'border-[#E27A3F]',
-    textColor: 'text-[#E27A3F]',
-  },
-  {
-    id: 2,
-    date: '1 - 30 AGUSTUS 2026',
-    title: 'Registration Opens',
-    description: 'Pendaftaran tim dibuka untuk seluruh kategori kompetisi.',
-    borderColor: 'border-[#304B32]',
-    textColor: 'text-[#304B32]',
-  },
-  {
-    id: 3,
-    date: '1 - 30 AGUSTUS 2026',
-    title: 'Registration Opens',
-    description: 'Pendaftaran tim dibuka untuk seluruh kategori kompetisi.',
-    borderColor: 'border-[#C19A2D]',
-    textColor: 'text-[#C19A2D]',
-  },
-  {
-    id: 4,
-    date: '1 - 30 AGUSTUS 2026',
-    title: 'Registration Opens',
-    description: 'Pendaftaran tim dibuka untuk seluruh kategori kompetisi.',
-    borderColor: 'border-[#51829B]',
-    textColor: 'text-[#51829B]',
-  }
-];
+// Define the new shape based on your input
+export interface TimelineItem {
+  time: string;
+  title: string;
+}
 
-export default function Timeline() {
+// Update the component's props to accept "timeline"
+interface TimelineProps {
+  timeline: TimelineItem[];
+}
+
+export default function Timeline({ timeline }: TimelineProps) {
+  // Helper function to format the ISO date string to "Day Month Year"
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   return (
     <div 
       className="relative min-h-screen flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-bottom bg-no-repeat bg-cover"
@@ -76,27 +62,28 @@ export default function Timeline() {
 
         {/* Timeline Section */}
         <div className="flex flex-col md:flex-row justify-between items-stretch gap-6 md:gap-4">
-          {timelineData.map((step) => (
-            <div key={step.id} className="flex-1 flex flex-col items-center relative">
+          {timeline.map((step, index) => (
+            // Using index as key since id is no longer provided
+            <div key={index} className="flex-1 flex flex-col items-center relative">
               
-              {/* Step Circle */}
+              {/* Step Circle (Auto-numbered based on array index) */}
               <div className="w-10 h-10 rounded-full bg-[#F4BE29] border-[3px] border-[#2C2C2C] flex justify-center items-center font-black text-[#2C2C2C] z-10 mb-6 shadow-sm">
-                {step.id}
+                {index + 1} 
               </div>
 
               {/* Content Card */}
               <div 
-                className={`w-full h-full bg-[#FAF8F1] border ${step.borderColor} p-6 shadow-sm flex flex-col items-center text-center`}
+                className="w-full h-full bg-[#FAF8F1] border border-black/10 p-6 shadow-sm flex flex-col items-center text-center"
               >
-                <p className={`text-[11px] md:text-xs font-bold tracking-wider mb-2 ${step.textColor}`}>
-                  {step.date}
+                {/* Formatted Date */}
+                <p className="text-[11px] md:text-xs font-bold tracking-wider mb-2 text-[#5A5A5A]">
+                  {formatDate(step.time)}
                 </p>
+                
+                {/* Title */}
                 <h3 className="text-lg font-black text-[#1A1A1A] mb-2 font-serif">
                   {step.title}
                 </h3>
-                <p className="text-sm text-[#5A5A5A] leading-relaxed">
-                  {step.description}
-                </p>
               </div>
             </div>
           ))}
@@ -105,4 +92,4 @@ export default function Timeline() {
       </div>
     </div>
   );
-};
+}

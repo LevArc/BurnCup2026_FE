@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 
-const FacebookIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.3.2 2.3.2v2.5h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.89h-2.4v6.98A10 10 0 0 0 22 12" />
+const EmailIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
-const TwitterIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.7L4.5 22H1.4l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2Zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20Z" />
+const PhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
   </svg>
 );
 
@@ -21,101 +23,80 @@ const InstagramIcon = () => (
 export default function Footer() {
   return (
     <footer className="relative bg-[#2b180d] text-[#d1bfae] px-6 md:px-16 pt-8 md:pt-12 pb-6 overflow-hidden">
-      {/* Content row */}
+      {/* Main content */}
       <div className="flex flex-col md:flex-row flex-wrap justify-between gap-8 border-b border-[#4a2511] pb-8 mb-6">
-        {/* logo BC */}
-        <div className="flex-[2] min-w-[250px]">
+
+        {/* Brand */}
+        <div className="flex-[2] min-w-[200px] max-w-xs">
           <img
             src="/assets/Logo Burncup.svg"
             alt="Burncup Logo"
-            className="h-28 md:h-28 mb-4"
+            className="h-20 md:h-24 mb-4"
           />
           <p className="text-sm leading-relaxed">
             Ekspedisi kompetisi tahunan yang menjelajahi tiga medan:
             olahraga, e-sports, dan kreativitas.
           </p>
-
-          <div className="flex gap-4 md:gap-8 mt-4">
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">5</strong>
-              Kategori
-            </div>
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">1000+</strong>
-              Peserta
-            </div>
-            <div className="text-sm">
-              <strong className="block text-2xl text-[#f1c40f]">2026</strong>
-              Tahun Event
-            </div>
-          </div>
         </div>
 
         {/* Quick Links */}
-        <div className="min-w-[150px]">
+        <div className="min-w-[140px]">
           <h4 className="text-white mb-4 font-semibold">Quick Links</h4>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-sm">
             <li>
-              <Link
-                to="/"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Home
-              </Link>
+              <Link to="/" className="transition-colors hover:text-white">Home</Link>
             </li>
             <li>
-              <Link
-                to="/about"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/competitions"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Competitions
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/sponsors"
-                className="cursor-pointer transition-colors hover:text-white"
-              >
-                Sponsors
-              </Link>
+              <Link to="/competitions" className="transition-colors hover:text-white">Competitions</Link>
             </li>
           </ul>
         </div>
 
         {/* Contact */}
-        <div className="min-w-[150px]">
+        <div className="min-w-[160px] mr-[4%]">
           <h4 className="text-white mb-4 font-semibold">Contact Us</h4>
-          <p className="text-sm">hello@burncup2026.id</p>
+          
+          <div className="flex flex-col space-y-3">
+            <a 
+              href="mailto:hello@burncup2026.id" 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
+            >
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <EmailIcon />
+              </span>
+              burncup@gmail.com
+            </a>
 
-          <div className="flex gap-3 mt-4">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+            <a 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <FacebookIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <PhoneIcon />
+              </span>
+              +62 897-9634-277 (Audi)
             </a>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+            
+            <a 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <TwitterIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <PhoneIcon />
+              </span>
+              +62 813-1647-9534 (Dania)
             </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white text-sm cursor-pointer transition-colors hover:bg-[#6b3518]"
+
+            
+
+            <a 
+              href="https://www.instagram.com/burncup" 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
-              <InstagramIcon />
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <InstagramIcon />
+              </span>
+              @burncup
             </a>
           </div>
         </div>

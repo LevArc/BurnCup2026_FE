@@ -1,41 +1,22 @@
 import { useState } from 'react';
 
-// Define a type for the FAQ data
-interface FAQItem {
+// Define the shape of a single FAQ item
+export interface FAQItem {
   id: number;
   question: string;
   answer: string;
 }
 
-const faqData: FAQItem[] = [
-  {
-    id: 1,
-    question: "Question?",
-    answer: "Answer"
-  },
-  {
-    id: 2,
-    question: "Question?",
-    answer: "Answer"
-  },
-  {
-    id: 3,
-        question: "Question?",
-    answer: "Answer"
-  },
-  {
-    id: 4,
-        question: "Question?",
-    answer: "Answer"
-  },
-  {
-    id: 5,
-        question: "Question?",
-    answer: "Answer"
-  }
-];
+// Define the component's props
+interface FaqProps {
+  faqData: FAQItem[];
+  bgImageUrl?: string;
+}
 
-export default function Faq() {
+export default function Faq({ 
+  faqData, 
+  bgImageUrl = "/competitionBackground/FaqBg.png" 
+}: FaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -43,15 +24,14 @@ export default function Faq() {
   };
 
   return (
-        <div 
+    <div 
       className="relative min-h-screen flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-bottom bg-no-repeat bg-cover"
       style={{ 
-        /* 👇 PUT YOUR BACKGROUND IMAGE LINK HERE 👇 */
-        backgroundImage: "url('/competitionBackground/FaqBg.png')",
+        backgroundImage: `url('${bgImageUrl}')`,
         backgroundColor: "#F4EFDF" /* Fallback color just in case the image loads slowly */
       }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full max-w-4xl mx-auto">
         
         <h2 
           className="text-[clamp(2rem,3.4vw,10rem)] font-extrabold text-[#9A4921] text-center mb-8 tracking-wide font-['Alfa_Slab_One'] font-normal"
@@ -89,7 +69,7 @@ export default function Faq() {
               </div>
 
               <div
-                className={`transition-all duration-300 ease-in-out ${
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
                   openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="avatarBg" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <clipPath id="circle-clip">
+      <circle cx="24" cy="24" r="24"/>
+    </clipPath>
+  </defs>
+  <circle cx="24" cy="24" r="24" fill="url(#avatarBg)"/>
+  <circle cx="24" cy="18" r="8.5" fill="white" fill-opacity="0.92"/>
+  <ellipse cx="24" cy="45" rx="14" ry="10" fill="white" fill-opacity="0.92" clip-path="url(#circle-clip)"/>
+</svg>
