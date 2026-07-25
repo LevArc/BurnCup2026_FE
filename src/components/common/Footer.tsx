@@ -9,7 +9,8 @@ const EmailIcon = () => (
 
 const PhoneIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
   </svg>
 );
 
@@ -67,17 +68,25 @@ export default function Footer() {
             </a>
 
             <a 
-              href="tel:+6281234567890" 
               className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
               <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
                 <PhoneIcon />
               </span>
-              +62 812-3456-7890
+              +62 813-1647-9534 (Dania)
             </a>
 
             <a 
-              href="https://instagram.com/burncup_placeholder" 
+              className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
+            >
+              <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
+                <PhoneIcon />
+              </span>
+              +62 897-9634-277 (Audi)
+            </a>
+
+            <a 
+              href="https://www.instagram.com/burncup" 
               target="_blank" 
               rel="noreferrer"
               className="flex items-center gap-3 text-sm transition-colors hover:text-white group"

@@ -26,6 +26,9 @@ const RegistrationForm: React.FC = () => {
 
   // State to hold validation error messages
   const [errorMessage, setErrorMessage] = useState<string>('');
+  
+  // New state to lock the category if the backend provides it
+  const [isCategoryLocked, setIsCategoryLocked] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -57,6 +60,11 @@ const RegistrationForm: React.FC = () => {
             mappedCategory = 'sma';
           } else if (userTypeLower === 'public') {
             mappedCategory = 'public';
+          }
+
+          // If a mapped category was found from the backend, lock the dropdown
+          if (mappedCategory) {
+            setIsCategoryLocked(true);
           }
 
           setFormData({
@@ -240,14 +248,22 @@ const RegistrationForm: React.FC = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
+                disabled={isCategoryLocked}
+                className={`w-full appearance-none border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309] transition-colors ${
+                  isCategoryLocked 
+                    ? 'bg-gray-200 cursor-not-allowed opacity-80' 
+                    : 'bg-[#f4f5f7]'
+                }`}
               >
                 <option value="" disabled>Select your status</option>
                 <option value="binusian">Binusian</option>
                 <option value="sma">SMA / SMK</option>
                 <option value="public">Public</option>
               </select>
-              <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+              {/* Only show the chevron if it's not locked to signify it can't be opened */}
+              {!isCategoryLocked && (
+                <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+              )}
             </div>
           </div>
 
