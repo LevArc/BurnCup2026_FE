@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Phone,
   UserSquare2,
@@ -355,6 +355,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 // --- DASHBOARD COMPONENT ---
 export default function DashboardComp() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [teams, setTeams] = useState<Team[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -409,6 +410,13 @@ export default function DashboardComp() {
   useEffect(() => {
     fetchDashboardData();
   }, [fetchDashboardData]);
+
+  useEffect(() => {
+    if (location.state?.notification) {
+      showNotification(location.state.notification.type, location.state.notification.message);
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const handleEditSuccess = () => {
     setIsEditModalOpen(false);
