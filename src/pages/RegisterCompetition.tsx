@@ -88,6 +88,12 @@ const RegistrationForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    
+    // Optional: Prevent typing letters in NIM field right away
+    if (name === 'nim' && value && !/^\d*$/.test(value)) {
+      return; 
+    }
+
     setFormData(prevState => ({
       ...prevState,
       [name]: value
@@ -101,8 +107,9 @@ const RegistrationForm: React.FC = () => {
     setErrorMessage(''); // Reset errors on new submission attempt
 
     const currentCategory = formData.category.trim().toLowerCase();
+    const phoneTrimmed = formData.phoneNumber.trim();
 
-    // 1. Validation Checks
+    // 1. Base Validation Checks
     if (!currentCategory) {
       setErrorMessage('Please select a Category Status.');
       return;
@@ -111,17 +118,37 @@ const RegistrationForm: React.FC = () => {
       setErrorMessage('Full Name is required.');
       return;
     }
-    if (!formData.phoneNumber.trim()) {
+    if (!phoneTrimmed) {
       setErrorMessage('Phone Number is required.');
       return;
     }
 
-    // Conditional Validation based on category
+    // 2. Phone Number Validation (10 to 15 digits, allows optional '+' at the start)
+    // Strip spaces or dashes in case user formatted it like "0812-3456-7890"
+    const cleanedPhone = phoneTrimmed.replace(/[\s-]/g, ''); 
+    const phoneRegex = /^\+?\d{10,15}$/;
+    
+    if (!phoneRegex.test(cleanedPhone)) {
+      setErrorMessage('Please enter a valid phone number (between 10 and 15 digits).');
+      return;
+    }
+
+    // 3. Conditional Validation based on category
     if (currentCategory === 'binusian') {
-      if (!formData.nim.trim() || !formData.major.trim()) {
+      const nimTrimmed = formData.nim.trim();
+      
+      if (!nimTrimmed || !formData.major.trim()) {
         setErrorMessage('NIM and Major are required for Binusian.');
         return;
       }
+      
+      // NIM Validation: Exactly 10 characters and only numbers
+      const nimRegex = /^\d{10}$/;
+      if (!nimRegex.test(nimTrimmed)) {
+        setErrorMessage('NIM must be exactly 10 digits long and contain only numbers.');
+        return;
+      }
+
     } else if (currentCategory === 'sma') {
       if (!formData.school.trim()) {
         setErrorMessage('School is required for SMA / SMK.');
@@ -149,7 +176,7 @@ const RegistrationForm: React.FC = () => {
       const payload = {
         userType: formattedUserType,
         fullName: formData.fullName.trim() ? formData.fullName.trim() : null,
-        phoneNumber: formData.phoneNumber.trim() ? formData.phoneNumber.trim() : null,
+        phoneNumber: cleanedPhone, // Send the cleaned version to backend
         nim: (currentCategory === 'binusian' && formData.nim.trim()) ? formData.nim.trim() : null,
         major: (currentCategory === 'binusian' && formData.major.trim()) ? formData.major.trim() : null,
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
@@ -260,7 +287,6 @@ const RegistrationForm: React.FC = () => {
                 <option value="sma">SMA / SMK</option>
                 <option value="public">Public</option>
               </select>
-              {/* Only show the chevron if it's not locked to signify it can't be opened */}
               {!isCategoryLocked && (
                 <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
               )}
@@ -268,7 +294,7 @@ const RegistrationForm: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Full Name - ALWAYS SHOWS */}
+            {/* Full Name */}
             <div>
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
                 Full Name
@@ -297,7 +323,6 @@ const RegistrationForm: React.FC = () => {
                   placeholder="Enter your school name"
                   className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
                 />
-                {/* INLINE WARNING ADDED HERE */}
                 <div className="mt-2 text-xs text-[#a14714] bg-[#fbf7f0] flex items-start gap-1.5">
                   <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                   <p>
@@ -315,11 +340,12 @@ const RegistrationForm: React.FC = () => {
                   NIM
                 </label>
                 <input
-                  type="text"
+                  type="text" // Kept as text to allow leading zeros without browser weirdness
                   name="nim"
+                  maxLength={10} // HTML level cap
                   value={formData.nim}
                   onChange={handleChange}
-                  placeholder="Enter your NIM"
+                  placeholder="Enter your NIM (10 digits)"
                   className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
                 />
               </div>
@@ -334,7 +360,6 @@ const RegistrationForm: React.FC = () => {
                 <div className="relative">
                   <select
                     name="major"
-                    // Checks if the fetched major is in the accepted list. If not, defaults to ""
                     value={[
                       "Creative Communication",
                       "Computer Science - Software Engineering",
@@ -377,11 +402,12 @@ const RegistrationForm: React.FC = () => {
                 Phone Number
               </label>
               <input
-                type="text"
+                type="tel"
                 name="phoneNumber"
+                maxLength={20} // Generous limit in HTML just in case they add spaces/dashes
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                placeholder="Enter your phone number"
+                placeholder="e.g. +62812345678"
                 className="w-full bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
               />
             </div>
