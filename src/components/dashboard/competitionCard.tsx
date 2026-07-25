@@ -3,7 +3,6 @@ import API_URL from '../../lib/api';
 import {
   MapPin,
   Banknote,
-  Check,
   Users,
   Loader2,
   AlertCircle,
