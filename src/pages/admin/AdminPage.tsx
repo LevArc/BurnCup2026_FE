@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminDashboard from "../../components/admin/AdminDashboard";
+import API_URL from "../../lib/api";
 
 export default function AdminPage() {
   const [authorized, setAuthorized] = useState<boolean | null>(null);
@@ -15,7 +16,7 @@ export default function AdminPage() {
 
     // Hit any admin endpoint to check if user is admin
     // If BE returns 403, user is not admin
-    fetch("${API_URL}/api/admin/basic-info", {
+    fetch(`${API_URL}/api/admin/basic-info`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       if (res.status === 403 || res.status === 401) {

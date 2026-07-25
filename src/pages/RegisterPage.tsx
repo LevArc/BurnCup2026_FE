@@ -74,7 +74,7 @@ export default function Register() {
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-10 text-center animate-pulse">
               <div className="mb-4 rounded-full bg-green-100 p-3">
-                <CheckIcon />
+                <CheckIcon /> 
               </div>
               <h2 className="text-xl font-bold text-[#4a2511] mb-2">{successMessage}</h2>
               <p className="text-sm text-[#5e4231]">

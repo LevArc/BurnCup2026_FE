@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import CompetitionCard from './competitionCard';
+import API_URL from '../../lib/api';
 
 interface Team {
   id: string;
@@ -49,6 +50,9 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  
+  // State to lock the category if the backend provides it
+  const [isCategoryLocked, setIsCategoryLocked] = useState<boolean>(false);
 
   useEffect(() => {
     // Map existing user data to form data format
@@ -61,6 +65,11 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
       mappedCategory = 'sma';
     } else if (userTypeLower === 'public') {
       mappedCategory = 'public';
+    }
+
+    // If a mapped category was found from the user prop, lock the dropdown
+    if (mappedCategory) {
+      setIsCategoryLocked(true);
     }
 
     setFormData({
@@ -142,7 +151,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
         school: (currentCategory === 'sma' && formData.school.trim()) ? formData.school.trim() : null
       };
 
-      const response = await fetch('${API_URL}/api/protected/create-update-user-profile', {
+      const response = await fetch(`${API_URL}/api/protected/create-update-user-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -218,14 +227,22 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
+                disabled={isCategoryLocked}
+                className={`w-full appearance-none border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309] transition-colors ${
+                  isCategoryLocked 
+                    ? 'bg-gray-200 cursor-not-allowed opacity-80' 
+                    : 'bg-[#f4f5f7]'
+                }`}
               >
                 <option value="" disabled>Select your status</option>
                 <option value="binusian">Binusian</option>
                 <option value="sma">SMA / SMK</option>
                 <option value="public">Public</option>
               </select>
-              <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+              {/* Only show the chevron if it's not locked to signify it can't be opened */}
+              {!isCategoryLocked && (
+                <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
+              )}
             </div>
           </div>
 
@@ -297,7 +314,10 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                       "Business Hotel Management",
                       "Accounting",
                       "Business Information Technology",
-                      "Digital Business Innovation"
+                      "Digital Business Innovation",
+                      "Minor at Bekasi (Culinary)",
+                      "Minor at Bekasi (Korean)",
+                      "Minor at Bekasi (Free Elective)"
                     ].includes(formData.major) ? formData.major : ""}
                     onChange={handleChange}
                     className="w-full appearance-none bg-[#f4f5f7] border border-gray-300 text-gray-700 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#b45309]"
@@ -312,12 +332,15 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
                     <option value="Accounting">Accounting</option>
                     <option value="Business Information Technology">Business Information Technology</option>
                     <option value="Digital Business Innovation">Digital Business Innovation</option>
+                    <option value="Minor at Bekasi (Culinary)">Minor at Bekasi (Culinary)</option>
+                    <option value="Minor at Bekasi (Korean)">Minor at Bekasi (Korean)</option>
+                    <option value="Minor at Bekasi (Free Elective)">Minor at Bekasi (Free Elective)</option>
                   </select>
                   <ChevronDown className="absolute right-3 top-3 w-5 h-5 text-black pointer-events-none" />
                 </div>
               </div>
             )}
-            
+
             {/* Phone Number */}
             <div>
               <label className="block text-[#5c3a21] font-bold mb-1.5 text-sm">
@@ -353,7 +376,7 @@ const EditProfileModal = ({ user, onClose, onSuccess, onStatus }: EditProfileMod
 
 // --- DASHBOARD COMPONENT ---
 export default function DashboardComp() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -381,8 +404,8 @@ const navigate = useNavigate();
 
     try {
       const [userResponse, teamsResponse] = await Promise.all([
-        fetch('${API_URL}/api/protected/get-current-user', { method: 'GET', headers }),
-        fetch('${API_URL}/api/protected/get-teams', { method: 'GET', headers })
+        fetch(`${API_URL}/api/protected/get-current-user`, { method: 'GET', headers }),
+        fetch(`${API_URL}/api/protected/get-teams`, { method: 'GET', headers })
       ]);
 
       if (userResponse.status === 401 || teamsResponse.status === 401) {

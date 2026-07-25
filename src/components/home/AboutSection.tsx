@@ -19,10 +19,7 @@ export default function AboutSection() {
               What is BURNCUP?
             </h2>
             <p className="text-white/90 text-base leading-relaxed mt-4 font-['Plus_Jakarta_Sans']">
-              BURNCUP adalah ekspedisi kompetisi tahunan yang mengajak peserta
-              menjelajahi empat medan berbeda: olahraga, kreativitas, teknologi,
-              dan otomotif. Setiap kategori dirancang layaknya jalur pendakian:
-              penuh tantangan, kejutan, dan hadiah di setiap pos pemberhentian.
+              BURNCUP is an annual competition hosted by BINUS @Bekasi. To this day, the event continues to be a platform for BINUS @Bekasi students and high school/vocational school students from the Greater Jakarta area to showcase their talents, build friendships, and compete for the rotating trophy.
             </p>
             <div className="flex gap-3 mt-8 flex-wrap">
               {/* Primary CTA */}

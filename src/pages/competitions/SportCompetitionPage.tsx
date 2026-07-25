@@ -98,10 +98,10 @@ const SportCompetition: React.FC = () => {
               >
                 <div className="card-overlay">
                   <h3>{comp.title}</h3>
-                  <p>
+                  {/* <p>
                     Prove your athletic excellence at this prestigious event.
                     Compete for the championship title at Burncup 2026.
-                  </p>
+                  </p> */}
                 </div>
               </Link>
             ))}

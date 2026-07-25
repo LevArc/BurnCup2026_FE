@@ -20,7 +20,7 @@ import ESportCompetitionPage from "./pages/competitions/ESportCompetitionPage";
 import CreativeCompetitionPage from "./pages/competitions/CreativeCompetitionPage";
 
 // Placeholder competition ID — replace each with the real ID from DB
-const PLACEHOLDER_ID = "d6a407f1-624e-4a43-8efb-987292f2e89e";
+const PLACEHOLDER_ID = "3fcaa103-70ba-4efa-b775-f5ed550c6041";
 
 const COMPETITION_IDS: Record<string, string> = {
   // Sport
@@ -29,7 +29,7 @@ const COMPETITION_IDS: Record<string, string> = {
   volly:           PLACEHOLDER_ID,
   pingpong:        PLACEHOLDER_ID,
   billiard:        PLACEHOLDER_ID,
-  chess:           PLACEHOLDER_ID,
+  chess:          "0f94c459-1aee-49e8-8016-d50e0c97c7d6",
   // E-Sport
   fifa:            PLACEHOLDER_ID,
   "mobile-legend": PLACEHOLDER_ID,

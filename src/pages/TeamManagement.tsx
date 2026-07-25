@@ -76,7 +76,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
         competitionId: competitionId
       };
 
-      const response = await fetch('${API_URL}/api/protected/join-team', {
+      const response = await fetch(`${API_URL}/api/protected/join-team`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ const TeamManagement: React.FC<TeamManagementProps> = ({ competitionId: propId }
         teamName: teamName.trim()
       };
 
-      const response = await fetch('${API_URL}/api/protected/create-team', {
+      const response = await fetch(`${API_URL}/api/protected/create-team`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
