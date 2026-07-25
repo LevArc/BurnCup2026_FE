@@ -26,7 +26,7 @@ interface CompetitionCategory {
 
 const creativeCompetitions: CompetitionCategory[] = [
   { id: 'c1', title: 'Modern Dance', image: imgModernDance, path: '/competitions/modern-dance' },
-  { id: 'c2', title: 'Traditional Dance', image: imgTraditionalDance, path: '/competitions/traditional-dance' },
+  { id: 'c2', title: 'Tari Kreasi Daerah', image: imgTraditionalDance, path: '/competitions/tari-kreasi-daerah' },
   { id: 'c3', title: 'Cosplay', image: imgCosplay, path: '/competitions/cosplay' },
   { id: 'c4', title: 'Cookies Decoration', image: imgCakeDecoration, path: '/competitions/cookie-decoration' },
   { id: 'c5', title: 'Band', image: imgBand, path: '/competitions/band' },

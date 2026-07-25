@@ -73,17 +73,19 @@ export default function Footer() {
               <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
                 <PhoneIcon />
               </span>
-              +62 813-1647-9534 (Dania)
+              +62 897-9634-277 (Audi)
             </a>
-
+            
             <a 
               className="flex items-center gap-3 text-sm transition-colors hover:text-white group"
             >
               <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
                 <PhoneIcon />
               </span>
-              +62 897-9634-277 (Audi)
+              +62 813-1647-9534 (Dania)
             </a>
+
+            
 
             <a 
               href="https://www.instagram.com/burncup" 
