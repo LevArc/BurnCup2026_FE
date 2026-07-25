@@ -394,7 +394,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               </div>
               {!isPaid && remainingSlot>0 &&(
                 <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
-                  If there is a problem transfer to <br />BLU 001262346406<br />Send proof of transfer to 0897-9634-277
+                  If there is a problem transfer to <br />BLU 001262346406 a/n Siti Fina Milatina<br />Send proof of transfer to 0897-9634-277
                 </div>
               )}
             </div>
