@@ -392,9 +392,14 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
                 {Math.max(0, remainingSlot)} slot(s) left
               </div>
-              {!isPaid && remainingSlot>0 &&(
+              {!isPaid && remainingSlot > 0 && (
                 <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
-                  If there is a problem transfer to <br />BLU 001262346406 a/n Siti Fina Milatina<br />Send proof of transfer to 0897-9634-277
+                  If there is a problem, transfer to: <br />
+                  BLU 001262346406 a/n Siti Fina Milatina <br />
+                  <span className="font-bold block my-1">
+                    Please include your Team Code in the transfer notes.
+                  </span>
+                  Send proof of transfer to 0897-9634-277
                 </div>
               )}
             </div>
