@@ -129,7 +129,6 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
   const [qrData, setQrData] = useState<QrResponse | null>(null);
   const [isQrLoading, setIsQrLoading] = useState<boolean>(false);
   const [qrError, setQrError] = useState<string | null>(null);
-  const [qrStatusCode, setQrStatusCode] = useState<number | null>(null);
 
   // State for deleting member
   const [memberToDelete, setMemberToDelete] = useState<TeamMember | null>(null);
@@ -156,7 +155,6 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
             'Content-Type': 'application/json'
           }
         });
-        setQrStatusCode(response.status);
 
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
@@ -381,6 +379,12 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   )}
                 </>
               )}
+            </div>
+
+            <div className="w-full max-w-[280px] space-y-3">
+              <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
+                {Math.max(0, remainingSlot)} slot(s) left
+              </div>
             </div>
 
             <div className="mt-6">
