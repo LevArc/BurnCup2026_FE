@@ -8,7 +8,6 @@ import {
   AlertCircle,
   CheckCircle2,
   X,
-  RefreshCw
 } from 'lucide-react';
 
 // --- TypeScript Interfaces ---
