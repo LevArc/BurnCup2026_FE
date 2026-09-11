@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 export default function SponsorSection() {
   return (
     <div
-      className="relative min-h-[60vh] flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-bottom bg-no-repeat bg-cover"
+      className="relative min-h-[60vh] flex flex-col justify-center items-center py-20 px-4 overflow-hidden font-sans bg-top bg-no-repeat bg-cover"
       style={{
-        backgroundImage: "url('/competitionBackground/descriptionBg.png')",
+        backgroundImage: "url('/competitionBackground/SponsorBronze.png')",
         backgroundColor: "#F4ECD8",
       }}
     >
