@@ -73,7 +73,7 @@ export default function Footer() {
               <span className="w-8 h-8 rounded-full bg-[#4a2511] flex items-center justify-center text-white group-hover:bg-[#6b3518] transition-colors">
                 <PhoneIcon />
               </span>
-              +62 897-9634-277 (Audi)
+              +62 897-9634-277 (Christy)
             </a>
             
             <a 

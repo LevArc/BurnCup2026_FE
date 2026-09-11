@@ -3,13 +3,11 @@ import API_URL from '../../lib/api';
 import {
   MapPin,
   Banknote,
-  Check,
   Users,
   Loader2,
   AlertCircle,
   CheckCircle2,
   X,
-  RefreshCw
 } from 'lucide-react';
 
 // --- TypeScript Interfaces ---
@@ -350,8 +348,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   ) : qrError ? (
                     <div className="flex flex-col items-center text-red-800">
                       <AlertCircle size={40} className="mb-3 text-red-600" />
-                      <span className="text-sm font-semibold">Error Loading QR</span>
-                      <span className="text-xs mt-2 leading-tight">{qrError}</span>
+                      <span className="text-m mt-2 leading-tight">{qrError}</span>
                     </div>
                   ) : qrData?.qrLink ? (
                     <div className="flex flex-col items-center">
@@ -371,19 +368,13 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                     <div className="flex flex-col items-center">
                       <Banknote size={56} className="text-gray-600 mb-3" />
                       <span className="text-lg font-bold">Pending Payment</span>
-                      <span className="text-xs text-gray-600 mt-1">Please complete payment</span>
+                      <span className="text-m text-gray-600 mt-1">Transfer to: <br />
+                    BLU 001262346406 a/n Siti Fina Milatina <br />
+                    <span className="font-bold block my-1">
+                      Please include your Team Code in the transfer notes.
+                    </span>
+                    Send proof of transfer to 0897-9634-277</span>
                     </div>
-                  )}
-
-                  {/* Refresh Button */}
-                  {!isQrLoading && (
-                    <button
-                      onClick={() => window.location.reload()}
-                      className="mt-5 flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-100 text-[#4a3f35] border border-gray-300 rounded-md text-sm font-bold transition-colors shadow-sm"
-                    >
-                      <RefreshCw size={16} />
-                      Refresh Status
-                    </button>
                   )}
                 </>
               )}
@@ -393,11 +384,6 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
               <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
                 {Math.max(0, remainingSlot)} slot(s) left
               </div>
-              {!isPaid && remainingSlot>0 &&(
-                <div className="bg-[#bfdbfe] border border-blue-300 text-blue-800 text-xs py-2 px-3 rounded leading-tight text-center">
-                  If there is a problem transfer to <br />BLU 001262346406<br />Send proof of transfer to 0897-9634-277
-                </div>
-              )}
             </div>
 
             <div className="mt-6">
