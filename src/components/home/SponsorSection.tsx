@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const sponsorsTierM = [
+const sponsors = [
   {
     name: "Medikids",
     src: "/assets/Sponsor/tier3/Size M - Medikids.png",
@@ -25,9 +25,6 @@ const sponsorsTierM = [
     name: "Mastermind",
     src: "/assets/Sponsor/tier3/Size M mastermind.png",
   },
-];
-
-const sponsorsTierS = [
   {
     name: "Ramen Yes",
     src: "/assets/Sponsor/tier3/Size S logo ramen yes.png",
@@ -65,42 +62,21 @@ export default function SponsorSection() {
           </h2>
         </motion.div>
 
-        {/* Tier M Sponsors (Size M) */}
-        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 max-w-5xl mx-auto mb-8 sm:mb-10">
-          {sponsorsTierM.map((sponsor, index) => (
+        {/* Unified Sponsor Grid */}
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 max-w-5xl lg:max-w-6xl mx-auto">
+          {sponsors.map((sponsor, index) => (
             <motion.div
               key={sponsor.name}
               initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
               className="flex items-center justify-center bg-white p-6 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-black/5 hover:-translate-y-1 w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-40 sm:h-44 md:h-48"
             >
               <img
                 src={sponsor.src}
                 alt={sponsor.name}
                 className="max-w-[85%] max-h-[75%] object-contain"
-                loading="lazy"
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Tier S Sponsors (Size S) */}
-        <div className="flex flex-wrap justify-center items-center gap-5 sm:gap-7 max-w-4xl mx-auto">
-          {sponsorsTierS.map((sponsor, index) => (
-            <motion.div
-              key={sponsor.name}
-              initial={{ opacity: 0, scale: 0.85 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.3 + index * 0.08 }}
-              className="flex items-center justify-center bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-black/5 hover:-translate-y-1 w-full max-w-[220px] sm:max-w-[250px] md:max-w-[270px] h-32 sm:h-36 md:h-40"
-            >
-              <img
-                src={sponsor.src}
-                alt={sponsor.name}
-                className="max-w-[80%] max-h-[70%] object-contain"
                 loading="lazy"
               />
             </motion.div>
