@@ -14,28 +14,8 @@ const sponsors = [
     src: "/assets/Sponsor/tier3/Size M - Rumah Sakit Permata Keluarga Summarecon Bekasi.png",
   },
   {
-    name: "Wings",
-    src: "/assets/Sponsor/tier3/Size M Wings.png",
-  },
-  {
     name: "WINGSTOP",
     src: "/assets/Sponsor/tier3/Size M WINGSTOP.jpeg",
-  },
-  {
-    name: "Mastermind",
-    src: "/assets/Sponsor/tier3/Size M mastermind.png",
-  },
-  {
-    name: "Ramen Yes",
-    src: "/assets/Sponsor/tier3/Size S logo ramen yes.png",
-  },
-  {
-    name: "Mie Sedaap",
-    src: "/assets/Sponsor/tier3/Size S Mie Sedaap.png",
-  },
-  {
-    name: "Top Kopi",
-    src: "/assets/Sponsor/tier3/Size S Top Kopi.png",
   },
 ];
 
@@ -44,7 +24,7 @@ export default function SponsorSection() {
     <section
       className="relative min-h-screen flex flex-col justify-center items-center pt-28 pb-36 md:pt-36 md:pb-48 lg:pt-44 lg:pb-60 px-4 sm:px-6 lg:px-8 overflow-hidden font-sans bg-top bg-no-repeat bg-cover"
       style={{
-        backgroundImage: "url('/competitionBackground/SponsorBronze.png')",
+        backgroundImage: "url('/competitionBackground/Sponsor-Bronze.png')",
         backgroundColor: "#F4ECD8",
       }}
     >
@@ -57,7 +37,7 @@ export default function SponsorSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-12 md:mb-16"
         >
-          <h2 className="font-black text-[#1A1A1A] mb-3 font-['Alfa_Slab_One'] text-[clamp(2.2rem,4vw,4.5rem)] font-normal tracking-wide drop-shadow-sm">
+          <h2 className="font-black text-[#1A1A1A] mb-3 font-['Alfa_Slab_One'] text-[clamp(2.2rem,4vw,4.5rem)] font-normal tracking-wide drop-shadow-sm mt-20">
             Our Sponsors
           </h2>
         </motion.div>
