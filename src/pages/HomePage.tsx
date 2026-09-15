@@ -3,6 +3,7 @@ import Hero from "../components/home/Hero";
 import AboutSection from "../components/home/AboutSection";
 import CategorySection from "../components/home/CategorySection";
 import TimelineSection from "../components/home/TimelineSection";
+import SponsorSection from "../components/home/SponsorSection";
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <AboutSection />
       <CategorySection />
       <TimelineSection />
+      <SponsorSection />
     </main>
   );
 }
