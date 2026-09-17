@@ -74,11 +74,6 @@ interface CompetitionCardProps {
   team: Team;
 }
 
-interface QrResponse {
-  expiryTime: string;
-  qrLink: string;
-}
-
 interface NotificationState {
   type: 'success' | 'error';
   message: string;
@@ -124,9 +119,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     ? competition.binusianRegistrationFee
     : competition.nonBinusianRegistrationFee;
 
-  // State for QR Fetching
-  const [qrData, setQrData] = useState<QrResponse | null>(null);
-  const [isQrLoading, setIsQrLoading] = useState<boolean>(false);
+  // State for QR fetching errors
   const [qrError, setQrError] = useState<string | null>(null);
 
   // State for deleting member
@@ -141,7 +134,6 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     if (isPaid) return;
 
     const fetchQrCode = async () => {
-      setIsQrLoading(true);
       setQrError(null);
 
       try {
@@ -159,12 +151,8 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
           const errData = await response.json().catch(() => ({}));
           throw new Error(errData.error || 'Failed to load QR code. Please try again later.');
         }
-        const data: QrResponse = await response.json();
-        setQrData(data);
       } catch (error: any) {
         setQrError(error.message || 'An unexpected error occurred.');
-      } finally {
-        setIsQrLoading(false);
       }
     };
 
