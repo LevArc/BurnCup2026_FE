@@ -283,7 +283,7 @@ const RegistrationForm: React.FC = () => {
                 }`}
               >
                 <option value="" disabled>Select your status</option>
-                <option value="binusian">Binusian</option>
+                <option value="binusian">Binusian Bekasi</option>
                 <option value="sma">SMA / SMK</option>
                 <option value="public">Public</option>
               </select>
