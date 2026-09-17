@@ -74,11 +74,6 @@ interface CompetitionCardProps {
   team: Team;
 }
 
-interface QrResponse {
-  expiryTime: string;
-  qrLink: string;
-}
-
 interface NotificationState {
   type: 'success' | 'error';
   message: string;
@@ -124,9 +119,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     ? competition.binusianRegistrationFee
     : competition.nonBinusianRegistrationFee;
 
-  // State for QR Fetching
-  const [qrData, setQrData] = useState<QrResponse | null>(null);
-  const [isQrLoading, setIsQrLoading] = useState<boolean>(false);
+  // State for QR fetching errors
   const [qrError, setQrError] = useState<string | null>(null);
 
   // State for deleting member
@@ -141,7 +134,6 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     if (isPaid) return;
 
     const fetchQrCode = async () => {
-      setIsQrLoading(true);
       setQrError(null);
 
       try {
@@ -159,12 +151,8 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
           const errData = await response.json().catch(() => ({}));
           throw new Error(errData.error || 'Failed to load QR code. Please try again later.');
         }
-        const data: QrResponse = await response.json();
-        setQrData(data);
       } catch (error: any) {
         setQrError(error.message || 'An unexpected error occurred.');
-      } finally {
-        setIsQrLoading(false);
       }
     };
 
@@ -338,47 +326,32 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   <span className="text-lg font-bold text-center">Payment Completed</span>
                   <span className="text-xs text-gray-600 mt-1 text-center">Scan to join the WhatsApp group</span>
                 </>
-              ) : (
-                <>
-                  {isQrLoading ? (
-                    <div className="flex flex-col items-center text-gray-600">
-                      <Loader2 size={40} className="animate-spin mb-3" />
-                      <span className="text-sm font-semibold">Generating QR...</span>
-                    </div>
-                  ) : qrError ? (
-                    <div className="flex flex-col items-center text-red-800">
-                      <AlertCircle size={40} className="mb-3 text-red-600" />
-                      <span className="text-m mt-2 leading-tight">{qrError}</span>
-                    </div>
-                  ) : qrData?.qrLink ? (
-                    <div className="flex flex-col items-center">
-                      <img
-                        src={qrData.qrLink}
-                        alt="Payment QR Code"
-                        className="w-48 h-48 object-contain mb-3 rounded"
-                      />
-                      <span className="text-base font-bold">Scan to Pay</span>
-                      {qrData.expiryTime && (
-                        <span className="text-xs text-gray-600 mt-1">
-                          Expires: {new Date(qrData.expiryTime).toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center">
-                      <Banknote size={56} className="text-gray-600 mb-3" />
-                      <span className="text-lg font-bold">Pending Payment</span>
-                      <span className="text-m text-gray-600 mt-1">Transfer to: <br />
-                    BLU 001262346406 a/n Siti Fina Milatina <br />
-                    <span className="font-bold block my-1">
-                      Please include your Team Code in the transfer notes.
-                    </span>
-                    Send proof of transfer to 0897-9634-277</span>
-                    </div>
-                  )}
-                </>
-              )}
+              ) : remainingSlot === 0 ? (
+                <div className="flex flex-col items-center text-red-800">
+                  <AlertCircle size={40} className="mb-3 text-red-600" />
+                  <span className="text-m mt-2 leading-tight">{qrError}</span>
+                </div>
+              ) :
+
+                (
+                  <div className="flex flex-col items-center">
+                    <Banknote size={56} className="text-gray-600 mb-3" />
+                    <span className="text-lg font-bold">Pending Payment</span>
+                    <span className="text-m text-gray-600 mt-1">Transfer to: <br />
+                      BLU 001262346406 a/n Siti Fina Milatina <br />
+                      <span className="font-bold block my-1">
+                        Please include your Team Code in the transfer notes.
+                      </span>
+                      Send proof of transfer to 0897-9634-277</span>
+                  </div>
+                )}
             </div>
+            {!isPaid && qrError && remainingSlot > 0 && (
+              <div className="w-full max-w-[280px] mb-5 p-3 bg-red-100 border border-red-400 text-red-800 rounded-md flex items-start gap-2">
+                <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                <span className="text-sm">{qrError}</span>
+              </div>
+            )}
 
             <div className="w-full max-w-[280px] space-y-3">
               <div className="bg-[#fca5a5] border border-red-400 text-red-900 text-sm font-semibold py-2 px-3 rounded text-center">
