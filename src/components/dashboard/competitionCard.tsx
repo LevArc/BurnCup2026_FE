@@ -337,12 +337,24 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   <div className="flex flex-col items-center">
                     <Banknote size={56} className="text-gray-600 mb-3" />
                     <span className="text-lg font-bold">Pending Payment</span>
-                    <span className="text-m text-gray-600 mt-1">Transfer to: <br />
+
+                    <span className="text-m text-gray-600 mt-1 text-center">
+                      Transfer to: <br />
                       BLU 001262346406 a/n Siti Fina Milatina <br />
+
                       <span className="font-bold block my-1">
                         Please include your Team Code in the transfer notes.
                       </span>
-                      Send proof of transfer to 0897-9634-277</span>
+
+                      <a
+                        href="https://forms.gle/47q5kMayUkfmyqdp7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 font-semibold underline hover:text-blue-800"
+                      >
+                        Submit proof of transfer
+                      </a>
+                    </span>
                   </div>
                 )}
             </div>
