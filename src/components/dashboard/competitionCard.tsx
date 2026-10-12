@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API_URL from '../../lib/api';
+import { getWibCountdownTarget } from './competitionCountdown';
 import {
   MapPin,
   Banknote,
@@ -218,9 +219,9 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     }
   };
 
-  // Helper to calculate countdowns
-  const calculateTimeLeft = (targetDate: string) => {
-    const difference = new Date(targetDate).getTime() - new Date().getTime();
+  // Count down to an exact WIB instant, regardless of the viewer's timezone.
+  const calculateTimeLeft = (targetTime: number) => {
+    const difference = targetTime - Date.now();
     if (difference > 0) {
       return {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -232,16 +233,18 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   };
 
-  const [regTimeLeft, setRegTimeLeft] = useState(calculateTimeLeft(competition.registrationEndDate));
-  const [compTimeLeft, setCompTimeLeft] = useState(calculateTimeLeft(competition.competitionStartDate));
+  const registrationEndTime = getWibCountdownTarget(competition.registrationEndDate, 'registrationEnd');
+  const competitionStartTime = getWibCountdownTarget(competition.competitionStartDate, 'competitionStart');
+  const [regTimeLeft, setRegTimeLeft] = useState(calculateTimeLeft(registrationEndTime));
+  const [compTimeLeft, setCompTimeLeft] = useState(calculateTimeLeft(competitionStartTime));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setRegTimeLeft(calculateTimeLeft(competition.registrationEndDate));
-      setCompTimeLeft(calculateTimeLeft(competition.competitionStartDate));
+      setRegTimeLeft(calculateTimeLeft(registrationEndTime));
+      setCompTimeLeft(calculateTimeLeft(competitionStartTime));
     }, 1000);
     return () => clearInterval(timer);
-  }, [competition]);
+  }, [registrationEndTime, competitionStartTime]);
 
   return (
     <div className="font-sans text-[#3c2f25] max-w-6xl relative">
@@ -331,6 +334,11 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   <AlertCircle size={40} className="mb-3 text-red-600" />
                   <span className="text-m mt-2 leading-tight">{qrError}</span>
                 </div>
+              ) : qrError === "Registration has ended" ? (
+                <div className="flex flex-col items-center text-red-800">
+                  <AlertCircle size={40} className="mb-3 text-red-600" />
+                  <span className="text-m mt-2 leading-tight">{qrError}</span>
+                </div>
               ) :
 
                 (
@@ -358,7 +366,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ team }) => {
                   </div>
                 )}
             </div>
-            {!isPaid && qrError && remainingSlot > 0 && (
+            {!isPaid && qrError && remainingSlot > 0 && !(qrError === "Registration has ended") && (
               <div className="w-full max-w-[280px] mb-5 p-3 bg-red-100 border border-red-400 text-red-800 rounded-md flex items-start gap-2">
                 <AlertCircle size={18} className="shrink-0 mt-0.5" />
                 <span className="text-sm">{qrError}</span>
