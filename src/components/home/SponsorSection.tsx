@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
-const sponsors = [
+// Existing Size M Sponsors
+const sponsorsSizeM = [
   {
     name: "Medikids",
     src: "/assets/Sponsor/tier3/Size M - Medikids.png",
@@ -16,6 +17,42 @@ const sponsors = [
   {
     name: "WINGSTOP",
     src: "/assets/Sponsor/tier3/Size M WINGSTOP.jpeg",
+  },
+  {
+    name: "Barenbliss",
+    src: "/assets/Sponsor/tier3/M - Barenbliss.JPG",
+  },
+  {
+    name: "Wings",
+    src: "assets/Sponsor/tier3/Size M Wings.png",
+  },
+];
+
+// New Size S Sponsors
+const sponsorsSizeS = [
+  {
+    name: "Teazzi",
+    src: "/assets/Sponsor/tier4/S - Teazzi.PNG",
+  },
+  {
+    name: "PopSurvey",
+    src: "/assets/Sponsor/tier4/Size S - PopSurvey (opsi 2).png",
+  },
+  {
+    name: "Ramen Yes",
+    src: "/assets/Sponsor/tier4/Size S logo ramen yes.png",
+  },
+  {
+    name: "Mie Sedaap",
+    src: "/assets/Sponsor/tier4/Size S Mie Sedaap.png",
+  },
+  {
+    name: "Top Kopi",
+    src: "/assets/Sponsor/tier4/Size S Top Kopi.png",
+  },
+  {
+    name: "Mastermind",
+    src: "/assets/Sponsor/tier4/S - Mastermind2.jpeg",
   },
 ];
 
@@ -42,9 +79,9 @@ export default function SponsorSection() {
           </h2>
         </motion.div>
 
-        {/* Unified Sponsor Grid */}
-        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 max-w-5xl lg:max-w-6xl mx-auto">
-          {sponsors.map((sponsor, index) => (
+        {/* Size M Sponsor Grid */}
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 max-w-5xl lg:max-w-6xl mx-auto mb-12">
+          {sponsorsSizeM.map((sponsor, index) => (
             <motion.div
               key={sponsor.name}
               initial={{ opacity: 0, scale: 0.85 }}
@@ -52,6 +89,27 @@ export default function SponsorSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
               className="flex items-center justify-center bg-white p-6 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-black/5 hover:-translate-y-1 w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-40 sm:h-44 md:h-48"
+            >
+              <img
+                src={sponsor.src}
+                alt={sponsor.name}
+                className="max-w-[85%] max-h-[75%] object-contain"
+                loading="lazy"
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Size S Sponsor Grid */}
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto w-full">
+          {sponsorsSizeS.map((sponsor, index) => (
+            <motion.div
+              key={sponsor.name}
+              initial={{ opacity: 0, scale: 0.85 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="flex items-center justify-center bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-black/5 hover:-translate-y-1 w-full max-w-[150px] sm:max-w-[180px] md:max-w-[200px] h-24 sm:h-28 md:h-32"
             >
               <img
                 src={sponsor.src}
