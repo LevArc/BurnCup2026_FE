@@ -20,7 +20,7 @@ const sponsorsSizeM = [
   },
   {
     name: "Barenbliss",
-    src: "/assets/Sponsor/tier3/M - Barenbliss.JPG",
+    src: "/assets/Sponsor/tier3/M - Barenbliss.jpg",
   },
   {
     name: "Wings",
@@ -32,7 +32,7 @@ const sponsorsSizeM = [
 const sponsorsSizeS = [
   {
     name: "Teazzi",
-    src: "/assets/Sponsor/tier4/S - Teazzi.PNG",
+    src: "assets/Sponsor/tier4/S - Teazzi.png",
   },
   {
     name: "PopSurvey",
